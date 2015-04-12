@@ -1,6 +1,6 @@
 package dev.huntul.finalfuntasy.item;
 
-public class Item {
+public abstract class Item {
 	private int value;
 	private int cost;
 	private String desc;
