@@ -1,4 +1,4 @@
-// Kelas Battle, v1.00
+// Kelas Battle, V1.01
 
 import java.util.Random;
 import java.util.Scanner;
@@ -33,11 +33,17 @@ public class Battle{
                                         System.out.println(P.getCharacters()[j].getName() + " menyerang " + M.getClass());
                                         
                                     }
-                                    case 2: {
-
+                                    case 2: { 
+                                        System.out.println("Pilih Magic");
+                                        for(int i=0;i<"Magic".length;i++){
+                                            System.out.println("(" + i + ") " + "Magic"[i].name);
+                                        }
+                                        int k = in.nextInt();
+                                        //try catch untuk mana-nya, implementasi ya tul wkwk
+                                        P.getCharacters()[j].useMagic(M);
                                     }
-                                    case 3: {
-
+                                    case 3: { // kelas itemnya dibuat duluu
+                                            
                                     }
                                     default: {
                                         System.out.println("Masukan salah! ulangi");
