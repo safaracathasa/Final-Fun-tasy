@@ -1,7 +1,12 @@
-package dev.huntul.finalfuntasy.item;
+public class HealingItem extends Item 
+{
+	public HealingItem(int value, int cost, String name, int ) 
+	{
+		super(value,cost,name);
+	}
 
-public class HealingItem extends Item {
-	public HealingItem(int value, int cost, String desc) {
-		super(value,cost,desc);
+	public void effectItem(Character ch)
+	{
+		ch.setCurHP(ch.getCurHP + value);
 	}
 }
