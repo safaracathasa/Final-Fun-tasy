@@ -1,54 +1,56 @@
-public class Pemain {
-    private int money;
-    private Item[] item;
-    private Point position;
-    private Characters[] characters;
+package dev.huntul.finalfuntasy.pemain;
 
-    public Pemain (int money, Item[] benda, Point posisi, Characters[] chars)
-    {
-        this.money = money;
-        this.item = benda;
-        this.position = posisi;
-        this.characters = chars;
-    }
-    
-    public void setMoney (int duit)
-    {
-        this.money = duit;
-    }
-    
-    public void setItem (Item[] benda)
-    {
-        this.item = benda;
-    }
-    
-    public void setPosition (Point posisi)
-    {
-        this.position = posisi;
-    }
-    
-    public void setCharacters (Characters[] chars)
-    {
-        this.characters = chars;
-    }
-    
-    public int getMoney ()
-    {
-        return this.money;
-    }
-    
-    public Item[] getItem ()
-    {
-        return this.item;
-    }
-    
-    public Point getPosition ()
-    {
-        return this.position;
-    }
-    
-    public Characters[] getCharacters ()
-    {
-        return this.characters;
-    }
+import java.io.Serializable;
+
+import dev.huntul.finalfuntasy.character.CharacterGame;
+import dev.huntul.finalfuntasy.etc.Point;
+import dev.huntul.finalfuntasy.item.Stock;
+
+public class Pemain implements Serializable {
+	private Point posisi;
+	private int money;
+	private CharacterGame[] characters;
+	private Stock[] stocks;
+	
+	public Pemain(CharacterGame[] characters) {
+		posisi = new Point(0,0);
+		setMoney(1000);
+		this.setCharacters(characters);
+		stocks = new Stock[100];
+		for (int i = 0; i < stocks.length; i++ ) {
+			stocks[i] = null;
+		}
+	}
+	
+	public Point getPosisi() {
+		return posisi;
+	}
+	
+	public void setPosisi(Point posisi) {
+		this.posisi = posisi;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public CharacterGame[] getCharacters() {
+		return characters;
+	}
+
+	public void setCharacters(CharacterGame[] characters) {
+		this.characters = characters;
+	}
+
+	public Stock[] getStocks() {
+		return stocks;
+	}
+
+	public void setStocks(Stock[] stocks) {
+		this.stocks = stocks;
+	}
 }
