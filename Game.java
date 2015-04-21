@@ -5,52 +5,54 @@ import dev.huntul.finalfuntasy.arena.OutOfArenaExcept;
 import dev.huntul.finalfuntasy.etc.PosInfo;
 import dev.huntul.finalfuntasy.pemain.Pemain;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Game {
 	private boolean running = false;
 	private boolean error;
-	private int x,y;
 //	private Thread thread;
 	private Pemain pemain;
 	private Arena arena;
-	private FileWriter f;
-	private Scanner reader, in;
+	ObjectOutputStream objectOutputStream;
+	private Scanner in;
 	private PosInfo pInfo;
+	ObjectInputStream objectInputStream;
 	
 	public Game() {
 		pemain = new Pemain();
 		arena = new Arena(10,10);
 		pInfo = new PosInfo();
+		pInfo.plotMonster(pemain.getPosisi().getX(),pemain.getPosisi().getY());
 	}
 
 	public Game(String save) {
 		try {
-			reader = new Scanner(new FileInputStream(save));
-		} catch (FileNotFoundException e) {
+			objectInputStream = new ObjectInputStream(new FileInputStream(save));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		while (reader.hasNext()) {
-			x = reader.nextInt();
-			y = reader.nextInt();
+		try {
+			pInfo = (PosInfo) objectInputStream.readObject();
+			pemain = (Pemain) objectInputStream.readObject();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
 		}
-		pemain = new Pemain(x,y);
 		arena = new Arena(10,10);
-		pInfo = new PosInfo();
 	}
 	
 	public void run() {
 		running = true;
 		in = new Scanner(System.in);
 		while (running) {
+			printMap(arena.getHeight(),arena.getWidth());
+			System.out.println();
 			do {
 				error = false;
-				printMap(arena.getHeight(),arena.getWidth());
 				System.out.println();
 				System.out.print("COMMAND : ");
 				String cmd = in.next();
@@ -98,17 +100,26 @@ public class Game {
 					}
 					case "v" 	: {
 						try {
-							try {
-								f = new FileWriter(new File("save.txt"));
-							} catch (IOException e1) {
-								e1.printStackTrace();
-							}
-							f.write(pemain.getPosisi().getX() + " " + pemain.getPosisi().getY() + "\n");
-							System.out.println("Game berhasil di-save!");
-							f.close();
+							objectOutputStream = new ObjectOutputStream(new FileOutputStream("save.txt"));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
+						try {
+							objectOutputStream.writeObject(pInfo);
+							objectOutputStream.writeObject(pemain);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						System.out.println("Save successful!");
+						error = true;
+						break;
+					}
+					case "t" 	: {
+						System.out.println("--- Player Status ---");
+						System.out.println("Posisi X 	: " + pemain.getPosisi().getX());
+						System.out.println("Posisi Y 	: " + pemain.getPosisi().getY());
+						System.out.println("Money		: " + pemain.getMoney());
+						error = true;
 						break;
 					}
 					default		: {
@@ -181,6 +192,12 @@ public class Game {
 				return "x";
 			} else {
 				return "i";
+			}
+		} else if (pInfo.cekMonster(x,y)) {
+			if ((pemain.getPosisi().getX() == x) && (pemain.getPosisi().getY() == y)) {
+				return "x";
+			} else {
+				return "m";
 			}
 		} else {
 			if ((pemain.getPosisi().getX() == x) && (pemain.getPosisi().getY() == y)) {
