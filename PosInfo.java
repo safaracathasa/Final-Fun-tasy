@@ -1,3 +1,5 @@
+// Kelas PosInfo V1.03
+
 package dev.huntul.finalfuntasy.etc;
 import java.io.Serializable;
 import java.util.Random;
@@ -5,6 +7,10 @@ import java.util.Random;
 public class PosInfo implements Serializable {
 	private int[] posMonsterX = new int[20];
 	private int[] posMonsterY = new int[20];
+	private int[] posItemX = new int[10];
+	private int[] posItemY = new int[10];
+	private int iEff = 0;
+	
 	public PosInfo() {
 		
 	}
@@ -38,13 +44,11 @@ public class PosInfo implements Serializable {
         
         return(test1||test2||test3||test4||test5);
     }
-    
-    	public void isToko(int x, int y) throws MismatchPositionExcept {
-		if (!cekToko(x,y)) {
-			throw new MismatchPositionExcept("Hanya bisa membeli item di toko!");
-		}
-	}
-    
+    public void lootItem(int x, int y){
+    	posItemX[iEff] = x;
+    	posItemY[iEff] = y;
+    	iEff = iEff + 1;
+    }
     public boolean cekItem(int x, int y) {
         // Mengembalikan True jika posisi pemain tepat berada pada posisi item
         // Silakan diedit bagian "KONSTANTA", menyesuaikan dengan kebutuhan
@@ -93,7 +97,12 @@ public class PosInfo implements Serializable {
         boolean test09 = (x==x09 && y==y09);
         boolean test10 = (x==x10 && y==y10);
         
-        return(test01||test02||test03||test04||test05||test06||test07||test08||test09||test10);
+        boolean isLooted = false;
+        for(int i=0;i<iEff;i++){
+        	isLooted = isLooted || (posItemX[i] == x && posItemY[i] = y);
+        }
+        
+        return((test01||test02||test03||test04||test05||test06||test07||test08||test09||test10)&&(!isLooted));
     }
     
 public void plotMonster(int x, int y) {
