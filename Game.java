@@ -2,8 +2,12 @@ package dev.huntul.finalfuntasy;
 
 import dev.huntul.finalfuntasy.arena.Arena;
 import dev.huntul.finalfuntasy.arena.OutOfArenaExcept;
+import dev.huntul.finalfuntasy.character.CharacterGame;
+import dev.huntul.finalfuntasy.etc.MismatchPositionExcept;
 import dev.huntul.finalfuntasy.etc.PosInfo;
 import dev.huntul.finalfuntasy.pemain.Pemain;
+import dev.huntul.finalfuntasy.shop.OutOfMoneyExcept;
+import dev.huntul.finalfuntasy.shop.Shop;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,13 +22,28 @@ public class Game {
 //	private Thread thread;
 	private Pemain pemain;
 	private Arena arena;
-	ObjectOutputStream objectOutputStream;
+	private ObjectOutputStream objectOutputStream;
 	private Scanner in;
 	private PosInfo pInfo;
-	ObjectInputStream objectInputStream;
+	private ObjectInputStream objectInputStream;
+	private CharacterGame character;
+	private Shop shop;
 	
 	public Game() {
-		pemain = new Pemain();
+		System.out.println("--- CHARACTER CREATION ---");
+		System.out.println();
+		in = new Scanner(System.in);
+		CharacterGame[] characters = new CharacterGame[3];
+		System.out.print("Nama Pengendali Bumi : ");
+		String char1 = in.next();
+		characters[0] = new CharacterGame(char1,"Pengendali Bumi");
+		System.out.print("Nama Pengendali Bulan : ");
+		String char2 = in.next();
+		characters[1] = new CharacterGame(char2,"Pengendali Bulan");
+		System.out.print("Nama Pengendali Matahari : ");
+		String char3 = in.next();
+		characters[2] = new CharacterGame(char3,"Pengendali Matahari");
+		pemain = new Pemain(characters);
 		arena = new Arena(10,10);
 		pInfo = new PosInfo();
 		pInfo.plotMonster(pemain.getPosisi().getX(),pemain.getPosisi().getY());
@@ -48,6 +67,7 @@ public class Game {
 	public void run() {
 		running = true;
 		in = new Scanner(System.in);
+		shop = new Shop();
 		while (running) {
 			printMap(arena.getHeight(),arena.getWidth());
 			System.out.println();
@@ -76,7 +96,6 @@ public class Game {
 						break;
 					}
 					case "s" 	: {
-		
 						try {
 							arena.cekPos(pemain.getPosisi().getX(),pemain.getPosisi().getY()+1);
 							pemain.getPosisi().setY(pemain.getPosisi().getY()+1);
@@ -119,6 +138,65 @@ public class Game {
 						System.out.println("Posisi X 	: " + pemain.getPosisi().getX());
 						System.out.println("Posisi Y 	: " + pemain.getPosisi().getY());
 						System.out.println("Money		: " + pemain.getMoney());
+						
+						System.out.println("--- " + pemain.getCharacters()[0].getNama() + " Status ---");
+						System.out.println("Level	 	: " + pemain.getCharacters()[0].getLV());
+						System.out.println("STR 		: " + pemain.getCharacters()[0].getSTR());
+						System.out.println("VIT 		: " + pemain.getCharacters()[0].getVIT());
+						System.out.println("INT 		: " + pemain.getCharacters()[0].getINT());
+						System.out.println("Job 		: " + pemain.getCharacters()[0].getJob());
+						
+						System.out.println("--- " + pemain.getCharacters()[1].getNama() + " Status ---");
+						System.out.println("Level	 	: " + pemain.getCharacters()[1].getLV());
+						System.out.println("STR 		: " + pemain.getCharacters()[1].getSTR());
+						System.out.println("VIT 		: " + pemain.getCharacters()[1].getVIT());
+						System.out.println("INT 		: " + pemain.getCharacters()[1].getINT());
+						System.out.println("Job 		: " + pemain.getCharacters()[1].getJob());
+						
+						System.out.println("--- " + pemain.getCharacters()[2].getNama() + " Status ---");
+						System.out.println("Level	 	: " + pemain.getCharacters()[2].getLV());
+						System.out.println("STR 		: " + pemain.getCharacters()[2].getSTR());
+						System.out.println("VIT 		: " + pemain.getCharacters()[2].getVIT());
+						System.out.println("INT 		: " + pemain.getCharacters()[2].getINT());
+						System.out.println("Job 		: " + pemain.getCharacters()[2].getJob());
+
+						System.out.println("--- Inventory ---");
+						if (pemain.getStocks()[0] == null) {
+							System.out.println("Empty");
+						} else {
+							int i = 1;
+							while (pemain.getStocks()[i-1] != null) {
+								System.out.println(i + ". " + pemain.getStocks()[i-1].getItem().getName() + " : " + pemain.getStocks()[i-1].getStock());
+								i++;
+							}
+						}
+						
+						error = true;
+						break;
+					}
+					case "h" 	: {
+						try {
+							pInfo.isToko(pemain.getPosisi().getX(),pemain.getPosisi().getY());
+							shop.showItem();
+							int pil;
+							do {
+								System.out.println();
+								System.out.print("Pilihan : ");
+								pil = in.nextInt();
+								if (pil > shop.getItems().length) {
+									System.out.println("Pilihan salah, ulangi!");
+								}
+							} while (pil > shop.getItems().length);
+							try {
+								shop.cekMoney(pemain.getMoney(),shop.getItems()[pil-1].getCost());
+								shop.buyItem(shop.getItems()[pil-1],pemain);
+							} catch (OutOfMoneyExcept e) {
+								e.response();
+							}
+						} catch (MismatchPositionExcept e) {
+							e.response();
+						}
+						
 						error = true;
 						break;
 					}
