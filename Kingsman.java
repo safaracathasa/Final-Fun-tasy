@@ -1,11 +1,12 @@
 public class Kingsman extends Monster {
 
-    public Kingsman ()
+    public Kingsman (Character chars)
     {
-        this.ATK = 5;
-        this.maxHP = 200;
-        this.CurHP = 200;
-        this.money = 50;
+        super(chars);
+        this.ATK = 5 * x;
+        this.maxHP = 200 * x;
+        this.CurHP = 200 * x;
+        this.money = 50 * x;
         this.item = {"Potion","Ether","Bomb"};
     }
 }
