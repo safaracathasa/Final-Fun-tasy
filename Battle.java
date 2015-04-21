@@ -39,8 +39,8 @@ public class Battle{
                                             System.out.println("(" + i + ") " + "Magic"[i].name);
                                         }
                                         int k = in.nextInt();
-                                        //try catch untuk mana-nya, implementasi ya tul wkwk
-                                        P.getCharacters()[j].useMagic(M);
+                                        //try catch untuk MPnya, implementasi ya tul wkwk
+                                        P.getCharacters()[k].useMagic(M);
                                     }
                                     case 3: { // kelas itemnya dibuat duluu
                                             
