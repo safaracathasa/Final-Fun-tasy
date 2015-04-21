@@ -1,12 +1,15 @@
 public class Pemain {
     private int money;
     private Item[] item;
-    private PosInfo position;
+    private Point position;
     private Characters[] characters;
 
-    public Pemain (int money, Item[] benda, PosiInfo posisi, Characters[] chars)
+    public Pemain (int money, Item[] benda, Point posisi, Characters[] chars)
     {
-        
+        this.money = money;
+        this.item = benda;
+        this.position = posisi;
+        this.characters = chars;
     }
     
     public void setMoney (int duit)
@@ -19,7 +22,7 @@ public class Pemain {
         this.item = benda;
     }
     
-    public void setPosition (PosInfo posisi)
+    public void setPosition (Point posisi)
     {
         this.position = posisi;
     }
@@ -39,7 +42,7 @@ public class Pemain {
         return this.item;
     }
     
-    public PosInfo getPosition ()
+    public Point getPosition ()
     {
         return this.position;
     }
