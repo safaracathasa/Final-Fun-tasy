@@ -1,30 +1,50 @@
-package dev.huntul.finalfuntasy.item;
-
-public abstract class Item {
+public abstract class Item 
+{
 	private int value;
 	private int cost;
-	private String desc;
-	public Item(int value, int cost, String desc) {
+	private String name;
+	
+	public Item(int value, int cost, String name) 
+	{
 		this.value = value;
 		this.cost = cost;
-		this.desc = desc;
+		this.name = name;
 	}
-	public int getValue() {
+
+// GETTER & SETTER	
+
+	public int getValue() 
+	{
 		return value;
 	}
-	public void setValue(int value) {
+
+	public void setValue(int value) 
+	{
 		this.value = value;
 	}
-	public int getCost() {
+
+	public int getCost() 
+	{
 		return cost;
 	}
-	public void setCost(int cost) {
+
+	public void setCost(int cost) 
+	{
 		this.cost = cost;
 	}
-	public String getDesc() {
-		return desc;
+
+	public String getName() 
+	{
+		return name;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+
+	public void setName(String name) 
+	{
+		this.name = name;
 	}
+
+// METHODE	
+
+	public abstract void effectItem();
+	
 }
