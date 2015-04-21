@@ -1,6 +1,10 @@
 package dev.huntul.finalfuntasy.etc;
+import java.io.Serializable;
+import java.util.Random;
 
-public class PosInfo {
+public class PosInfo implements Serializable {
+	private int[] posMonsterX = new int[20];
+	private int[] posMonsterY = new int[20];
 	public PosInfo() {
 		
 	}
@@ -86,94 +90,56 @@ public class PosInfo {
         return(test01||test02||test03||test04||test05||test06||test07||test08||test09||test10);
     }
     
+public void plotMonster(int x, int y) {
+        
+        boolean isSameAsItemOrToko;
+        boolean isSameAsOtherMonster;
+        boolean isSameAsPemain;
+        
+        Random rand = new Random();
+        for(int i = 0;i<20;i++){
+            do{
+                posMonsterX[i] = rand.nextInt(9);
+                posMonsterY[i] = rand.nextInt(9);
+                isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
+                isSameAsItemOrToko = cekItem(posMonsterX[i],posMonsterY[i]) || cekToko(posMonsterX[i],posMonsterY[i]);
+                isSameAsOtherMonster = false;
+                for(int j=0;j<i;j++){
+                    isSameAsOtherMonster = isSameAsOtherMonster || ((posMonsterX[i] == posMonsterX[j])&&(posMonsterY[i] == posMonsterY[j]));
+                }
+            } while(isSameAsItemOrToko || isSameAsOtherMonster || isSameAsPemain);
+        }
+    }
     public boolean cekMonster(int x, int y) {
         // Mengembalikan True jika posisi pemain tepat berada pada posisi monster
-        // Silakan diedit bagian "KONSTANTA", menyesuaikan dengan kebutuhan
+    	
 
-        // KONSTANTA
-        // posisi monster 01
-        int x01 = 1;
-        int y01 = 1;
-        // posisi monster 02
-        int x02 = 2;
-        int y02 = 2;
-        // posisi monster 03
-        int x03 = 3;
-        int y03 = 3;
-        // posisi monster 04
-        int x04 = 4;
-        int y04 = 4;
-        // posisi monster 05
-        int x05 = 5;
-        int y05 = 5;
-        // posisi monster 06
-        int x06 = 6;
-        int y06 = 6;
-        // posisi monster 07
-        int x07 = 7;
-        int y07 = 7;
-        // posisi monster 08
-        int x08 = 8;
-        int y08 = 8;
-        // posisi monster 09
-        int x09 = 9;
-        int y09 = 9;
-        // posisi monster 10
-        int x10 = 0;
-        int y10 = 0;
-        // posisi monster 11
-        int x11 = 0;
-        int y11 = 2;
-        // posisi monster 12
-        int x12 = 1;
-        int y12 = 3;
-        // posisi monster 13
-        int x13 = 2;
-        int y13 = 4;
-        // posisi monster 14
-        int x14 = 3;
-        int y14 = 5;
-        // posisi monster 15
-        int x15 = 4;
-        int y15 = 6;
-        // posisi monster 16
-        int x16 = 5;
-        int y16 = 7;
-        // posisi monster 17
-        int x17 = 6;
-        int y17 = 8;
-        // posisi monster 18
-        int x18 = 7;
-        int y18 = 9;
-        // posisi monster 19
-        int x19 = 8;
-        int y19 = 0;
-        // posisi monster 20
-        int x20 = 0;
-        int y20 = 3;
-        
+    	 // posisi item 01
+        int x01 = 8;
+        int y01 = 8;
+    	
         // PENGECEKAN
-        boolean test01 = (x==x01 && y==y01);
-        boolean test02 = (x==x02 && y==y02);
-        boolean test03 = (x==x03 && y==y03);
-        boolean test04 = (x==x04 && y==y04);
-        boolean test05 = (x==x05 && y==y05);
-        boolean test06 = (x==x06 && y==y06);
-        boolean test07 = (x==x07 && y==y07);
-        boolean test08 = (x==x08 && y==y08);
-        boolean test09 = (x==x09 && y==y09);
-        boolean test10 = (x==x10 && y==y10);
-        boolean test11 = (x==x11 && y==y11);
-        boolean test12 = (x==x12 && y==y12);
-        boolean test13 = (x==x13 && y==y13);
-        boolean test14 = (x==x14 && y==y14);
-        boolean test15 = (x==x15 && y==y15);
-        boolean test16 = (x==x16 && y==y16);
-        boolean test17 = (x==x17 && y==y17);
-        boolean test18 = (x==x18 && y==y18);
-        boolean test19 = (x==x19 && y==y19);
-        boolean test20 = (x==x20 && y==y20);
-        
+        boolean test01 = (x==posMonsterX[0] && y==posMonsterY[0]);
+        boolean test02 = (x==posMonsterX[1] && y==posMonsterY[1]);
+        boolean test03 = (x==posMonsterX[2] && y==posMonsterY[2]);
+        boolean test04 = (x==posMonsterX[3] && y==posMonsterY[3]);
+        boolean test05 = (x==posMonsterX[4] && y==posMonsterY[4]);
+        boolean test06 = (x==posMonsterX[5] && y==posMonsterY[5]);
+        boolean test07 = (x==posMonsterX[6] && y==posMonsterY[6]);
+        boolean test08 = (x==posMonsterX[7] && y==posMonsterY[7]);
+        boolean test09 = (x==posMonsterX[8] && y==posMonsterY[8]);
+        boolean test10 = (x==posMonsterX[9] && y==posMonsterY[9]);
+        boolean test11 = (x==posMonsterX[10] && y==posMonsterY[10]);
+        boolean test12 = (x==posMonsterX[11] && y==posMonsterY[11]);
+        boolean test13 = (x==posMonsterX[12] && y==posMonsterY[12]);
+        boolean test14 = (x==posMonsterX[13] && y==posMonsterY[13]);
+        boolean test15 = (x==posMonsterX[14] && y==posMonsterY[14]);
+        boolean test16 = (x==posMonsterX[15] && y==posMonsterY[15]);
+        boolean test17 = (x==posMonsterX[16] && y==posMonsterY[16]);
+        boolean test18 = (x==posMonsterX[17] && y==posMonsterY[17]);
+        boolean test19 = (x==posMonsterX[18] && y==posMonsterY[18]);
+        boolean test20 = (x==posMonsterX[19] && y==posMonsterY[19]);
+     
         return(test01||test02||test03||test04||test05||test06||test07||test08||test09||test10||test11||test12||test13||test14||test15||test16||test17||test18||test19||test20);
     }
 }
