@@ -39,6 +39,12 @@ public class PosInfo implements Serializable {
         return(test1||test2||test3||test4||test5);
     }
     
+    	public void isToko(int x, int y) throws MismatchPositionExcept {
+		if (!cekToko(x,y)) {
+			throw new MismatchPositionExcept("Hanya bisa membeli item di toko!");
+		}
+	}
+    
     public boolean cekItem(int x, int y) {
         // Mengembalikan True jika posisi pemain tepat berada pada posisi item
         // Silakan diedit bagian "KONSTANTA", menyesuaikan dengan kebutuhan
