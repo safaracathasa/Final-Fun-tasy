@@ -1,44 +1,26 @@
-public class Character implements Skillable 
+public abstract class Character
 {
 	protected String namaChar;
 	protected int cSTR;
 	protected int cVIT;
 	protected int cINT;
 	protected int cLV;
-	protected String jobChar;
+	protected int maxHP;
+	protected int maxMP;
+	protected int curHP;
+	protected int curMP;
 
-	public Character(String nama, String job)
+	public Character(String nama, int s, int v, int i)
 	{
-		switch (job)
-		{
-			case ("Hero") :
-			{
-				this.namaChar 	= nama;
-				this.jobChar 	= job;
-				this.cSTR 		= 6;
-				this.cVIT 		= 10;
-				this.cINT		= 4;
-				this.cLV 		= 1;	
-			}
-			case ("Mage") :
-			{
-				this.namaChar 	= nama;
-				this.jobChar 	= job;
-				this.cSTR 		= 2;
-				this.cVIT 		= 6;
-				this.cINT		= 12;
-				this.cLV 		= 1;	
-			}
-			case ("Pirate") :
-			{
-				this.namaChar 	= nama;
-				this.jobChar 	= job;
-				this.cSTR 		= 8;
-				this.cVIT 		= 8;
-				this.cINT		= 4;
-				this.cLV 		= 1;	
-			}
-		}
+		this.namaChar 	= nama;
+		this.cSTR 		= s;
+		this.cVIT 		= v;
+		this.cINT 		= i;
+		this.maxHP 		= (10*v);
+		this.curHP 		= this.maxHP;	
+		this.maxMP		= (10*i);
+		this.curMP 		= this.maxMP;
+		this.cLV 		= 1;
 	}
 
 // GETTER
@@ -48,10 +30,6 @@ public class Character implements Skillable
 		return(this.namaChar);
 	}
 
-	public String getJob()
-	{
-		return(this.jobChar);
-	}
 
 	public int getSTR()
 	{
@@ -68,20 +46,26 @@ public class Character implements Skillable
 		return(this.cINT);
 	}
 
-	public int getHP()
+	public int getMaxHP()
 	{
-		return((this.cVIT) * 10);
+		return(this.maxHP);
 	}
 
-	public int getMP()
+	public int getMaxMP()
 	{
-		return((this.cINT) * 10);
+		return(this.maxMP);
 	}
 
-	public int getATK()
+	public int getCurHP()
 	{
-		return((this.cSTR) * 2);
+		return(this.curHP);
 	}
+
+	public int getCurMP()
+	{
+		return(this.curMP);
+	}
+
 
 	public int getLV()
 	{
@@ -106,54 +90,85 @@ public class Character implements Skillable
 		this.cINT = x;
 	}
 
-	public void setHP(int x)
+	public void setMaxHP(int x)
 	{
-		this.cHP = x;
+		this.maxHP = x;
 	}
 
-	public void setMP(int x)
+	public void setMaxMP(int x)
 	{
-		this.cMP = x;
+		this.maxMP = x;
 	}
+
+	public void setCurHP(int x)
+	{
+		this.curHP = x;
+	}
+
+	public void setCurMP(int x)
+	{
+		this.curMP = x;
+	}	
 
 	public void setLV(int x)
 	{
 		this.cLV = x;
 	}
 
+// METHODE GET DAMAGE
+
+	public int damageAttack()
+	{
+		return(2*this.cSTR);
+	}
+
+	public int damageMagic()
+	{
+		return(2*this.cINT);
+	}
+
 // METHODE
 
-
-
-// IMPLEMENTASI INTERFACE
-	
-	public void Attack()
+	public void useAttack(Monster mon)
 	{
-		switch (this.jobChar)
+		mon.setHP(mon.getHP - this.damageAttack);
+	}
+
+	public abstract void useMagic(Monster mon);
+
+	public void useItem(Item item, Character ch)
+	{
+		item.effectItem(ch);
+	}
+
+	public abstract void levelUP(int lv)
+	{
+		// BELUM DI SET EXCEPTION KALAU LEVEL LEBIH DARI 40
+
+		this.cLV = this.cLV + lv;
+
+		float i;
+
+		if ((this.cLV <= 10)
 		{
-			case ("Hero") :
-			{
-
-			}
-			case ("Mage") :
-			{
-
-			}
-			case ("Pirate") :
-			{
-
-			}
+			i = 1;
 		}
+		else if ((this.cLV >= 11) && (this.cLV <=20))
+		{
+			i = 1.2;
+		}
+		else if ((this.cLV >= 21) && (this.cLV <=30))
+		{
+			i = 1.5;
+		}
+		else 
+		{
+			i = 2;
+		}
+
+		this.setSTR(this.getSTR + (this.getSTR*i));
+
+		this.setVIT(this.getVIT + (this.getVIT*i));
+
+		this.setINT(this.getINT + (this.getINT*i));
 	}
-
-	public void Defend()
-	{
-
-	}
-
-	public void Heal()
-	{
-
-	}
-
-}
