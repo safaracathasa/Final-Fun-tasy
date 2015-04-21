@@ -9,6 +9,8 @@ public class PosInfo implements Serializable {
 	private int[] posMonsterY = new int[20];
 	private int[] posItemX = new int[10];
 	private int[] posItemY = new int[10];
+	private int[] lootItemX = new int[10];
+	private int[] lootItemY = new int[10];
 	private int iEff = 0;
 	
 	public PosInfo() {
@@ -45,8 +47,8 @@ public class PosInfo implements Serializable {
         return(test1||test2||test3||test4||test5);
     }
     public void lootItem(int x, int y){
-    	posItemX[iEff] = x;
-    	posItemY[iEff] = y;
+    	lootItemX[iEff] = x;
+    	lootItemY[iEff] = y;
     	iEff = iEff + 1;
     }
     public boolean cekItem(int x, int y) {
@@ -55,51 +57,52 @@ public class PosInfo implements Serializable {
 
         // KONSTANTA
         // posisi item 01
-        int x01 = 2;
-        int y01 = 1;
+        posItemX[0] = 2;
+        posItemY[0] = 1;
         // posisi item 02
-        int x02 = 9;
-        int y02 = 9;
+        posItemX[1] = 9;
+        posItemY[1] = 9;
         // posisi item 03
-        int x03 = 5;
-        int y03 = 2;
+        posItemX[2] = 5;
+        posItemY[2] = 2;
         // posisi item 04
-        int x04 = 0;
-        int y04 = 7;
+        posItemX[3] = 0;
+        posItemY[3] = 7;
         // posisi item 05
-        int x05 = 3;
-        int y05 = 0;
+        posItemX[4] = 3;
+        posItemY[4] = 0;
         // posisi item 06
-        int x06 = 7;
-        int y06 = 6;
+        posItemX[5] = 7;
+        posItemY[5] = 6;
         // posisi item 07
-        int x07 = 2;
-        int y07 = 9;
+        posItemX[6] = 2;
+        posItemY[6] = 9;
         // posisi item 08
-        int x08 = 9;
-        int y08 = 7;
+        posItemX[7] = 9;
+        posItemY[7] = 7;
         // posisi item 09
-        int x09 = 1;
-        int y09 = 5;
+        posItemX[8] = 1;
+        posItemY[8] = 5;
         // posisi item 10
-        int x10 = 4;
-        int y10 = 4;
+        posItemX[9] = 4;
+        posItemY[9] = 4;
         
         // PENGECEKAN
-        boolean test01 = (x==x01 && y==y01);
-        boolean test02 = (x==x02 && y==y02);
-        boolean test03 = (x==x03 && y==y03);
-        boolean test04 = (x==x04 && y==y04);
-        boolean test05 = (x==x05 && y==y05);
-        boolean test06 = (x==x06 && y==y06);
-        boolean test07 = (x==x07 && y==y07);
-        boolean test08 = (x==x08 && y==y08);
-        boolean test09 = (x==x09 && y==y09);
-        boolean test10 = (x==x10 && y==y10);
+        
+        boolean test01 = (x==posItemX[0] && y==posItemY[0]);
+        boolean test02 = (x==posItemX[1] && y==posItemY[1]);
+        boolean test03 = (x==posItemX[2] && y==posItemY[2]);
+        boolean test04 = (x==posItemX[3] && y==posItemY[3]);
+        boolean test05 = (x==posItemX[4] && y==posItemY[4]);
+        boolean test06 = (x==posItemX[5] && y==posItemY[5]);
+        boolean test07 = (x==posItemX[6] && y==posItemY[6]);
+        boolean test08 = (x==posItemX[7] && y==posItemY[7]);
+        boolean test09 = (x==posItemX[8] && y==posItemY[8]);
+        boolean test10 = (x==posItemX[9] && y==posItemY[9]);
         
         boolean isLooted = false;
         for(int i=0;i<iEff;i++){
-        	isLooted = isLooted || (posItemX[i] == x && posItemY[i] = y);
+        	isLooted = isLooted || (lootItemX[i] == x && lootItemY[i] = y);
         }
         
         return((test01||test02||test03||test04||test05||test06||test07||test08||test09||test10)&&(!isLooted));
