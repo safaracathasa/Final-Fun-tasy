@@ -1,6 +1,7 @@
 public class Behemoth extends Monster {
-    public Behemoth()
+    public Behemoth(Characters chars)
     {
+        super(chars);
         this.ATK = 10;
         this.maxHP = 250;
         this.CurHP = 250;
