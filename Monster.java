@@ -6,6 +6,11 @@ public abstract class Monster {
     protected int money;
     protected String[] item;
     
+    public Monster (Character chars)
+    {
+        int x = 1+chars.getLVl()/5;
+    }
+    
     public void setATK(int atk)
     {
         this.ATK = atk;
@@ -36,7 +41,7 @@ public abstract class Monster {
     }
     
     //method
-    public void attackCharacter(Character chars)
+    public void useAttack(Character chars)
     {
         chars.setCurHP(chars.getCurHP() - ATK);
     }
