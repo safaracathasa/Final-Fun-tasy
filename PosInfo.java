@@ -16,6 +16,32 @@ public class PosInfo implements Serializable {
 	public PosInfo() {
 		
 	}
+	
+	public int getItem(){
+		
+		// Posisi item
+		int[] potion = {0,3,7,9}; // 1
+		int[] ether = {1,2,8}; // 2
+		int[] bomb = {4,5,6}; // 3
+		int i;
+		
+		for(i==0;i<potion.length;i++){
+			if(lootItemX[iEff] == posItemX[potion[i]]){
+				return 1;
+			}
+		}
+		for(i==0;i<ether.length;i++){
+			if(lootItemX[iEff] == posItemX[ether[i]]){
+				return 2;
+			}
+		}
+		for(i==0;i<bomb.length;i++){
+			if(lootItemX[iEff] == posItemX[bomb[i]]){
+				return 3;
+			}
+		}
+	}
+	
 	public boolean cekToko(int x, int y) {
         // Mengembalikan True jika posisi pemain tepat berada pada posisi toko
         // Silakan diedit bagian "KONSTANTA", menyesuaikan dengan kebutuhan
