@@ -2,6 +2,9 @@ package dev.huntul.finalfuntasy.character;
 
 import java.io.Serializable;
 
+import dev.huntul.finalfuntasy.item.Item;
+import dev.huntul.finalfuntasy.monster.Monster;
+
 public abstract class CharacterGame implements Serializable {
 	protected String namaChar;
 	protected int cSTR;
@@ -138,17 +141,17 @@ public abstract class CharacterGame implements Serializable {
 
 // METHODE
 
-/*	public void useAttack(Monster mon)
+	public void useAttack(Monster mon)
 	{
-		mon.setHP(mon.getHP - this.damageAttack);
+		mon.setCurHP(mon.getCurHP() - damageAttack());
 	}
 
 	public abstract void useMagic(Monster mon);
 
-	public void useItem(Item item, Character ch)
+	public <U> void useItem(Item item, U u)
 	{
-		item.effectItem(ch);
-	} */
+		item.effectItem(u);
+	}
 
 	public void levelUP(int lv)
 	{
