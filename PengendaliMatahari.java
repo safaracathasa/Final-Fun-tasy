@@ -1,20 +1,22 @@
-public class PengendaliMatahari extends Character
+package dev.huntul.finalfuntasy.character;
+
+public class PengendaliMatahari extends CharacterGame
 {
-	public Hero(String nama)
+	public PengendaliMatahari(String nama)
 	{
-		super(nama, 12, 10, 8);
+		super(nama, 12, 10, 8, "Pengendali Matahari");
 	}
 
-	public damageAttack()
+	public int damageAttack()
 	{
 		return(3*this.cSTR);
-	} @Override
+	}
 
 
-	public void useMagic(Monster mon)
+/*	public void useMagic(Monster mon)
 	{
 
-		if ((this.cLV <= 10)
+		if (this.cLV <= 10)
 		{
 			System.out.println("Sun!");
 			mon.setHP(mon.getHP - this.damageMagic);
@@ -35,5 +37,5 @@ public class PengendaliMatahari extends Character
 			mon.setHP(mon.getHP - this.damageMagic - 100);
 		}		
 
-	}
+	}*/
 }
