@@ -1,6 +1,6 @@
 package dev.huntul.finalfuntasy.item;
 
-import dev.huntul.finalfuntasy.character.CharacterGame;
+import dev.huntul.finalfuntasy.monster.Monster;
 
 
 public class AttackItem extends Item {
@@ -9,6 +9,6 @@ public class AttackItem extends Item {
 	}
 	
 	public <U> void effectItem(U u) {
-		((CharacterGame) u).setCurHP(((CharacterGame) u).getCurHP() + getValue());
+		((Monster) u).setCurHP(((Monster) u).getCurHP() - getValue());
 	}
 }
