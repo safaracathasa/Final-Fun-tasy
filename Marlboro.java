@@ -1,12 +1,11 @@
-public class Kingsman extends Monster {
+public class Marlboro extends Monster {
 
-    public Kingsman (Character chars)
+    public Marlboro (CharacterGame chars)
     {
         super(chars);
-        this.ATK = 5 * x;
-        this.maxHP = 200 * x;
-        this.CurHP = 200 * x;
-        this.money = 50 * x;
-        this.item = {"Potion","Ether","Bomb"};
+        this.ATK = this.ATK*15;
+        this.maxHP = this.maxHP*400;
+        this.CurHP = this.CurHP*400;
+        this.money = this.money*120;
     }
 }
