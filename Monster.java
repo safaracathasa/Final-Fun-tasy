@@ -9,6 +9,10 @@ public abstract class Monster {
     public Monster (CharacterGame chars)
     {
         int x = 1+chars.getLV()/5;
+        this.ATK = x;
+        this.maxHP = x;
+        this.CurHP = x;
+        this.money = x;
     }
     
     public void setATK(int atk)
