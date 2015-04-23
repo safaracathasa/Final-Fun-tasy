@@ -1,12 +1,11 @@
 public class Behemoth extends Monster {
     
-    public Behemoth(Character chars)
+    public Behemoth(CharacterGame chars)
     {
         super(chars);
-        this.ATK = 10*x;
-        this.maxHP = 250*x;
-        this.CurHP = 250*x;
-        this.money = 80*x;
-        this.item = {"Potion","Ether","Bomb"};
+        this.ATK = this.ATK*10;
+        this.maxHP = this.maxHP*250;
+        this.CurHP = this.CurHP*250;
+        this.money = this.money*80;
     }
 }
