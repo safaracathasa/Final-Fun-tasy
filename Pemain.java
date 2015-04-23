@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import dev.huntul.finalfuntasy.character.CharacterGame;
 import dev.huntul.finalfuntasy.etc.Point;
+import dev.huntul.finalfuntasy.item.Item;
 import dev.huntul.finalfuntasy.item.Stock;
 
 public class Pemain implements Serializable {
@@ -52,5 +53,18 @@ public class Pemain implements Serializable {
 
 	public void setStocks(Stock[] stocks) {
 		this.stocks = stocks;
+	}
+	
+	public void addItem(Item item) {
+		System.out.println("Acquired " + item.getName() + "!");
+		int i = 0;
+		while (stocks[i] != null) {
+			if (item.getName() == stocks[i].getItem().getName()) {
+				stocks[i].setStock(stocks[i].getStock()+1);
+				return;
+			}
+			i++;
+		}
+		stocks[i] = new Stock(item,1);
 	}
 }
