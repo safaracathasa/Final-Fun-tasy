@@ -1,50 +1,33 @@
-public abstract class Item 
-{
+package dev.huntul.finalfuntasy.item;
+
+import java.io.Serializable;
+
+public abstract class Item implements Serializable {
 	private int value;
 	private int cost;
 	private String name;
-	
-	public Item(int value, int cost, String name) 
-	{
+	public Item(String name, int value, int cost) {
 		this.value = value;
 		this.cost = cost;
-		this.name = name;
+		this.setName(name);
 	}
-
-// GETTER & SETTER	
-
-	public int getValue() 
-	{
+	public int getValue() {
 		return value;
 	}
-
-	public void setValue(int value) 
-	{
+	public void setValue(int value) {
 		this.value = value;
 	}
-
-	public int getCost() 
-	{
+	public int getCost() {
 		return cost;
 	}
-
-	public void setCost(int cost) 
-	{
+	public void setCost(int cost) {
 		this.cost = cost;
 	}
-
-	public String getName() 
-	{
+	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) 
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
-
-// METHODE	
-
-	public abstract void effectItem();
-	
+	public abstract <U> void effectItem(U u);
 }
