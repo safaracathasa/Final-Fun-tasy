@@ -6,9 +6,9 @@ public abstract class Monster {
     protected int money;
     protected String[] item;
     
-    public Monster (CharacterGame chars)
+    public Monster (CharacterGame chars1,CharacterGame chars2,CharacterGame chars3)
     {
-        int x = 1+chars.getLV()/5;
+        int x = (int)(1+(chars1.getLV()+chars2.getLV()+chars3.getLV())/5);
         this.ATK = x;
         this.maxHP = x;
         this.CurHP = x;
