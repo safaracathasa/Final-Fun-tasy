@@ -1,14 +1,22 @@
+package dev.huntul.finalfuntasy.monster;
+
+import dev.huntul.finalfuntasy.character.CharacterGame;
+import dev.huntul.finalfuntasy.pemain.Pemain;
+
 public abstract class Monster {
 
+	protected String name;
     protected int ATK;
     protected int maxHP;
     protected int CurHP;
     protected int money;
+    protected int incLevel;
     protected String[] item;
     
-    public Monster (CharacterGame chars1,CharacterGame chars2,CharacterGame chars3)
+    public Monster (String name, CharacterGame chars1,CharacterGame chars2,CharacterGame chars3)
     {
         int x = (int)(1+(chars1.getLV()+chars2.getLV()+chars3.getLV())/5);
+        this.name = name;
         this.ATK = x;
         this.maxHP = x;
         this.CurHP = x;
@@ -58,7 +66,7 @@ public abstract class Monster {
     {
         for (int i=0;i<=2;i++)
         {
-            chars[i].levelUP(chars[i].getLV());
+            chars[i].levelUP(incLevel);
         }
     }
 }
