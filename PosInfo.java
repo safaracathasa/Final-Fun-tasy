@@ -1,5 +1,3 @@
-// Kelas PosInfo V1.03
-
 package dev.huntul.finalfuntasy.etc;
 import java.io.Serializable;
 import java.util.Random;
@@ -16,32 +14,6 @@ public class PosInfo implements Serializable {
 	public PosInfo() {
 		
 	}
-	
-	public int getItem(){
-		
-		// Posisi item
-		int[] potion = {0,3,7,9}; // 1
-		int[] ether = {1,2,8}; // 2
-		int[] bomb = {4,5,6}; // 3
-		int i;
-		
-		for(i==0;i<potion.length;i++){
-			if(lootItemX[iEff] == posItemX[potion[i]]){
-				return 1;
-			}
-		}
-		for(i==0;i<ether.length;i++){
-			if(lootItemX[iEff] == posItemX[ether[i]]){
-				return 2;
-			}
-		}
-		for(i==0;i<bomb.length;i++){
-			if(lootItemX[iEff] == posItemX[bomb[i]]){
-				return 3;
-			}
-		}
-	}
-	
 	public boolean cekToko(int x, int y) {
         // Mengembalikan True jika posisi pemain tepat berada pada posisi toko
         // Silakan diedit bagian "KONSTANTA", menyesuaikan dengan kebutuhan
@@ -72,69 +44,76 @@ public class PosInfo implements Serializable {
         
         return(test1||test2||test3||test4||test5);
     }
-    public void lootItem(int x, int y){
-    	lootItemX[iEff] = x;
-    	lootItemY[iEff] = y;
-    	iEff = iEff + 1;
-    }
+	
+	public void isToko(int x, int y) throws MismatchPositionExcept {
+		if (!cekToko(x,y)) {
+			throw new MismatchPositionExcept("Hanya bisa membeli item di toko!");
+		}
+	}
+    
     public boolean cekItem(int x, int y) {
         // Mengembalikan True jika posisi pemain tepat berada pada posisi item
         // Silakan diedit bagian "KONSTANTA", menyesuaikan dengan kebutuhan
 
         // KONSTANTA
         // posisi item 01
-        posItemX[0] = 2;
-        posItemY[0] = 1;
+        int x01 = 2;
+        int y01 = 1;
         // posisi item 02
-        posItemX[1] = 9;
-        posItemY[1] = 9;
+        int x02 = 9;
+        int y02 = 9;
         // posisi item 03
-        posItemX[2] = 5;
-        posItemY[2] = 2;
+        int x03 = 5;
+        int y03 = 2;
         // posisi item 04
-        posItemX[3] = 0;
-        posItemY[3] = 7;
+        int x04 = 0;
+        int y04 = 7;
         // posisi item 05
-        posItemX[4] = 3;
-        posItemY[4] = 0;
+        int x05 = 3;
+        int y05 = 0;
         // posisi item 06
-        posItemX[5] = 7;
-        posItemY[5] = 6;
+        int x06 = 7;
+        int y06 = 6;
         // posisi item 07
-        posItemX[6] = 2;
-        posItemY[6] = 9;
+        int x07 = 2;
+        int y07 = 9;
         // posisi item 08
-        posItemX[7] = 9;
-        posItemY[7] = 7;
+        int x08 = 9;
+        int y08 = 7;
         // posisi item 09
-        posItemX[8] = 1;
-        posItemY[8] = 5;
+        int x09 = 1;
+        int y09 = 5;
         // posisi item 10
-        posItemX[9] = 4;
-        posItemY[9] = 4;
+        int x10 = 4;
+        int y10 = 4;
         
         // PENGECEKAN
-        
-        boolean test01 = (x==posItemX[0] && y==posItemY[0]);
-        boolean test02 = (x==posItemX[1] && y==posItemY[1]);
-        boolean test03 = (x==posItemX[2] && y==posItemY[2]);
-        boolean test04 = (x==posItemX[3] && y==posItemY[3]);
-        boolean test05 = (x==posItemX[4] && y==posItemY[4]);
-        boolean test06 = (x==posItemX[5] && y==posItemY[5]);
-        boolean test07 = (x==posItemX[6] && y==posItemY[6]);
-        boolean test08 = (x==posItemX[7] && y==posItemY[7]);
-        boolean test09 = (x==posItemX[8] && y==posItemY[8]);
-        boolean test10 = (x==posItemX[9] && y==posItemY[9]);
+        boolean test01 = (x==x01 && y==y01);
+        boolean test02 = (x==x02 && y==y02);
+        boolean test03 = (x==x03 && y==y03);
+        boolean test04 = (x==x04 && y==y04);
+        boolean test05 = (x==x05 && y==y05);
+        boolean test06 = (x==x06 && y==y06);
+        boolean test07 = (x==x07 && y==y07);
+        boolean test08 = (x==x08 && y==y08);
+        boolean test09 = (x==x09 && y==y09);
+        boolean test10 = (x==x10 && y==y10);
         
         boolean isLooted = false;
         for(int i=0;i<iEff;i++){
-        	isLooted = isLooted || (lootItemX[i] == x && lootItemY[i] = y);
+        	isLooted = isLooted || (posItemX[i] == x && posItemY[i] == y);
         }
         
         return((test01||test02||test03||test04||test05||test06||test07||test08||test09||test10)&&(!isLooted));
     }
     
-public void plotMonster(int x, int y) {
+    public void lootItem(int x, int y){
+    	posItemX[iEff] = x;
+    	posItemY[iEff] = y;
+    	iEff = iEff + 1;
+    }
+    
+    public void plotMonster(int x, int y) {
         
         boolean isSameAsItemOrToko;
         boolean isSameAsOtherMonster;
@@ -156,11 +135,6 @@ public void plotMonster(int x, int y) {
     }
     public boolean cekMonster(int x, int y) {
         // Mengembalikan True jika posisi pemain tepat berada pada posisi monster
-    	
-
-    	 // posisi item 01
-        int x01 = 8;
-        int y01 = 8;
     	
         // PENGECEKAN
         boolean test01 = (x==posMonsterX[0] && y==posMonsterY[0]);
