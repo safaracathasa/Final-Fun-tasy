@@ -1,5 +1,8 @@
-public abstract class Character
-{
+package dev.huntul.finalfuntasy.character;
+
+import java.io.Serializable;
+
+public abstract class CharacterGame implements Serializable {
 	protected String namaChar;
 	protected int cSTR;
 	protected int cVIT;
@@ -9,8 +12,9 @@ public abstract class Character
 	protected int maxMP;
 	protected int curHP;
 	protected int curMP;
+	protected String job;
 
-	public Character(String nama, int s, int v, int i)
+	public CharacterGame(String nama, int s, int v, int i, String job)
 	{
 		this.namaChar 	= nama;
 		this.cSTR 		= s;
@@ -21,6 +25,7 @@ public abstract class Character
 		this.maxMP		= (10*i);
 		this.curMP 		= this.maxMP;
 		this.cLV 		= 1;
+		this.job		= job;
 	}
 
 // GETTER
@@ -66,10 +71,14 @@ public abstract class Character
 		return(this.curMP);
 	}
 
-
 	public int getLV()
 	{
 		return(this.cLV);
+	}
+	
+	public String getJob()
+	{
+		return(this.job);
 	}
 
 // SETTER
@@ -129,7 +138,7 @@ public abstract class Character
 
 // METHODE
 
-	public void useAttack(Monster mon)
+/*	public void useAttack(Monster mon)
 	{
 		mon.setHP(mon.getHP - this.damageAttack);
 	}
@@ -139,9 +148,9 @@ public abstract class Character
 	public void useItem(Item item, Character ch)
 	{
 		item.effectItem(ch);
-	}
+	} */
 
-	public abstract void levelUP(int lv)
+	public void levelUP(int lv)
 	{
 		// BELUM DI SET EXCEPTION KALAU LEVEL LEBIH DARI 40
 
@@ -149,26 +158,27 @@ public abstract class Character
 
 		float i;
 
-		if ((this.cLV <= 10)
+		if (this.cLV <= 10)
 		{
 			i = 1;
 		}
 		else if ((this.cLV >= 11) && (this.cLV <=20))
 		{
-			i = 1.2;
+			i = (float) 1.2;
 		}
 		else if ((this.cLV >= 21) && (this.cLV <=30))
 		{
-			i = 1.5;
+			i = (float) 1.5;
 		}
 		else 
 		{
 			i = 2;
 		}
 
-		this.setSTR(this.getSTR + (this.getSTR*i));
+		this.setSTR((int) (this.getSTR() + (this.getSTR()*i)));
 
-		this.setVIT(this.getVIT + (this.getVIT*i));
+		this.setVIT((int) (this.getVIT() + (this.getVIT()*i)));
 
-		this.setINT(this.getINT + (this.getINT*i));
+		this.setINT((int) (this.getINT() + (this.getINT()*i)));
 	}
+}
