@@ -1,14 +1,16 @@
-public class PengendaliBumi extends Character
+package dev.huntul.finalfuntasy.character;
+
+public class PengendaliBumi extends CharacterGame
 {
-	public Hero(String nama)
+	public PengendaliBumi(String nama)
 	{
-		super(nama, 12, 10, 8);
+		super(nama, 12, 10, 8, "Pengendali Bumi");
 	}
 
-	public void useMagic(Monster mon)
+/*	public void useMagic(Monster mon)
 	{
 
-		if ((this.cLV <= 10)
+		if (this.cLV <= 10)
 		{
 			System.out.println("Terre!");
 			mon.setHP(mon.getHP - this.damageMagic);
@@ -29,5 +31,5 @@ public class PengendaliBumi extends Character
 			mon.setHP(mon.getHP - this.damageMagic - 100);
 		}		
 
-	}
+	}*/
 }
