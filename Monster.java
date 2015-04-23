@@ -6,9 +6,9 @@ public abstract class Monster {
     protected int money;
     protected String[] item;
     
-    public Monster (Character chars)
+    public Monster (CharacterGame chars)
     {
-        int x = 1+chars.getLVl()/5;
+        int x = 1+chars.getLV()/5;
     }
     
     public void setATK(int atk)
@@ -35,13 +35,13 @@ public abstract class Monster {
         this.CurHP = hp;
     }
     
-    public int getCurHP (int hp)
+    public int getCurHP ()
     {
-        this.CurHP = hp;
+        return this.CurHP;
     }
     
     //method
-    public void useAttack(Character chars)
+    public void useAttack(CharacterGame chars)
     {
         chars.setCurHP(chars.getCurHP() - ATK);
     }
@@ -50,11 +50,11 @@ public abstract class Monster {
     {
         P.setMoney(P.getMoney() + money);
     }
-    public void upLevel(Character[] chars)
+    public void upLevel(CharacterGame[] chars)
     {
         for (int i=0;i<=2;i++)
         {
-            chars[i].levelUP;
+            chars[i].levelUP(chars[i].getLV());
         }
     }
 }
