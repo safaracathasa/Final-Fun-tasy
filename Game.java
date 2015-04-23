@@ -3,8 +3,13 @@ package dev.huntul.finalfuntasy;
 import dev.huntul.finalfuntasy.arena.Arena;
 import dev.huntul.finalfuntasy.arena.OutOfArenaExcept;
 import dev.huntul.finalfuntasy.character.CharacterGame;
+import dev.huntul.finalfuntasy.character.PengendaliBulan;
+import dev.huntul.finalfuntasy.character.PengendaliBumi;
+import dev.huntul.finalfuntasy.character.PengendaliMatahari;
 import dev.huntul.finalfuntasy.etc.MismatchPositionExcept;
 import dev.huntul.finalfuntasy.etc.PosInfo;
+import dev.huntul.finalfuntasy.item.Item;
+import dev.huntul.finalfuntasy.item.ItemFactory;
 import dev.huntul.finalfuntasy.pemain.Pemain;
 import dev.huntul.finalfuntasy.shop.OutOfMoneyExcept;
 import dev.huntul.finalfuntasy.shop.Shop;
@@ -36,13 +41,13 @@ public class Game {
 		CharacterGame[] characters = new CharacterGame[3];
 		System.out.print("Nama Pengendali Bumi : ");
 		String char1 = in.next();
-		characters[0] = new CharacterGame(char1,"Pengendali Bumi");
+		characters[0] = new PengendaliBumi(char1);
 		System.out.print("Nama Pengendali Bulan : ");
 		String char2 = in.next();
-		characters[1] = new CharacterGame(char2,"Pengendali Bulan");
+		characters[1] = new PengendaliBulan(char2);
 		System.out.print("Nama Pengendali Matahari : ");
 		String char3 = in.next();
-		characters[2] = new CharacterGame(char3,"Pengendali Matahari");
+		characters[2] = new PengendaliMatahari(char3);
 		pemain = new Pemain(characters);
 		arena = new Arena(10,10);
 		pInfo = new PosInfo();
@@ -73,6 +78,10 @@ public class Game {
 			System.out.println();
 			do {
 				error = false;
+				if (pInfo.cekItem(pemain.getPosisi().getX(),pemain.getPosisi().getY())) {
+					pInfo.lootItem(pemain.getPosisi().getX(),pemain.getPosisi().getY());
+					pemain.addItem(ItemFactory.createItem());
+				}
 				System.out.println();
 				System.out.print("COMMAND : ");
 				String cmd = in.next();
@@ -264,7 +273,7 @@ public class Game {
 				return "x";
 			} else {
 				return "s";
-			}
+	 		}
 		} else if (pInfo.cekItem(x,y)) {
 			if ((pemain.getPosisi().getX() == x) && (pemain.getPosisi().getY() == y)) {
 				return "x";
