@@ -62,11 +62,4 @@ public abstract class Monster {
     {
         P.setMoney(P.getMoney() + money);
     }
-    public void upLevel(CharacterGame[] chars)
-    {
-        for (int i=0;i<=2;i++)
-        {
-            chars[i].levelUP(incLevel);
-        }
-    }
 }
