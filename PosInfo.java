@@ -112,7 +112,29 @@ public class PosInfo implements Serializable {
     	posItemY[iEff] = y;
     	iEff = iEff + 1;
     }
-    
+    public void rePlotMonster(int x, int y){
+    	boolean isSameAsItemOrToko;
+        boolean isSameAsOtherMonster;
+        boolean isSameAsPemain;
+    	Random rand = new Random();
+    	for(int i = 0;i<20;i++){
+            isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
+    		if(isSameAsPemain){
+    			do{
+	    			posMonsterX[i] = rand.nextInt(9);
+	                posMonsterY[i] = rand.nextInt(9);
+	                isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
+	                isSameAsItemOrToko = cekItem(posMonsterX[i],posMonsterY[i]) || cekToko(posMonsterX[i],posMonsterY[i]);
+	                isSameAsOtherMonster = false;
+	                for(int j=0;j<20;j++){
+	                	if(i!=j)
+	                		isSameAsOtherMonster = isSameAsOtherMonster || ((posMonsterX[i] == posMonsterX[j])&&(posMonsterY[i] == posMonsterY[j]));
+	                }
+    			}while(isSameAsItemOrToko || isSameAsOtherMonster || isSameAsPemain);
+    			break;
+    		}
+    	}
+    }
     public void plotMonster(int x, int y) {
         
         boolean isSameAsItemOrToko;
