@@ -1,9 +1,9 @@
 package dev.huntul.finalfuntasy.shop;
 
+import dev.huntul.finalfuntasy.item.AttackItem;
 import dev.huntul.finalfuntasy.item.HealingItem;
 import dev.huntul.finalfuntasy.item.Item;
 import dev.huntul.finalfuntasy.item.Stock;
-import dev.huntul.finalfuntasy.item.SupportItem;
 import dev.huntul.finalfuntasy.pemain.Pemain;
 
 public class Shop {
@@ -11,9 +11,9 @@ public class Shop {
 
 	public Shop() {
 		items = new Item[3];
-		items[0] = new HealingItem("Potion",50,50);
-		items[1] = new HealingItem("Ether",25,100);
-		items[2] = new SupportItem("Bomb",100,200);
+		items[0] = new HealingItem("Potion",50,50,1);
+		items[1] = new HealingItem("Ether",25,100,2);
+		items[2] = new AttackItem("Bomb",100,200);
 	}
 	
 	public Item[] getItems() {
