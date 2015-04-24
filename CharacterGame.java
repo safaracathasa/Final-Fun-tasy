@@ -148,9 +148,9 @@ public abstract class CharacterGame implements Serializable {
 
 	public abstract void useMagic(Monster mon);
 
-	public <U> void useItem(Item item, U u)
+	public void useItem(Item item, CharacterGame chars, Monster monster)
 	{
-		item.effectItem(u);
+		item.effectItem(chars, monster);
 	}
 
 	public void levelUP(int lv)
@@ -178,10 +178,18 @@ public abstract class CharacterGame implements Serializable {
 			i = 2;
 		}
 
-		this.setSTR((int) (this.getSTR() + (this.getSTR()*i)));
+		setSTR((int) (getSTR() + (getSTR()*i)));
 
-		this.setVIT((int) (this.getVIT() + (this.getVIT()*i)));
+		setVIT((int) (getVIT() + (getVIT()*i)));
 
-		this.setINT((int) (this.getINT() + (this.getINT()*i)));
+		setINT((int) (getINT() + (getINT()*i)));
+		
+		setMaxHP(getVIT() * 10);
+
+		setCurHP(getMaxHP());
+		
+		setMaxMP(getINT() * 10);
+
+		setCurMP(getMaxMP());
 	}
 }
