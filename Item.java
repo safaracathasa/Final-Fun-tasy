@@ -2,9 +2,12 @@ package dev.huntul.finalfuntasy.item;
 
 import java.io.Serializable;
 
+import dev.huntul.finalfuntasy.character.CharacterGame;
+import dev.huntul.finalfuntasy.monster.Monster;
+
 public abstract class Item implements Serializable {
-	private int value;
-	private int cost;
+	protected int value;
+	protected int cost;
 	private String name;
 	public Item(String name, int value, int cost) {
 		this.value = value;
@@ -29,5 +32,5 @@ public abstract class Item implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public abstract <U> void effectItem(U u);
+	public abstract void effectItem(CharacterGame chars, Monster monster);
 }
