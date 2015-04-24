@@ -16,7 +16,7 @@ public class Battle{
             System.out.println("HP "+P.getCharacters()[i].getNama()+": "+P.getCharacters()[i].getCurHP() + "/" + P.getCharacters()[i].getMaxHP());
             System.out.println("MP "+P.getCharacters()[i].getNama()+": "+P.getCharacters()[i].getCurMP() + "/" + P.getCharacters()[i].getMaxMP()+"\n");
         }
-        System.out.println("HP "+M.getName() +": "+M.getCurHP()+"\n");
+        System.out.println("HP "+M.getName() +": "+M.getCurHP()+"/"+M.getmaxHP()+"\n");
     }
     public void attack(CharacterGame C, Monster M){
         System.out.println();
