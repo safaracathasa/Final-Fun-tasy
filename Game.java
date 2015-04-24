@@ -10,6 +10,7 @@ import dev.huntul.finalfuntasy.etc.MismatchPositionExcept;
 import dev.huntul.finalfuntasy.etc.PosInfo;
 import dev.huntul.finalfuntasy.item.Item;
 import dev.huntul.finalfuntasy.item.ItemFactory;
+import dev.huntul.finalfuntasy.monster.MonsterFactory;
 import dev.huntul.finalfuntasy.pemain.Pemain;
 import dev.huntul.finalfuntasy.shop.OutOfMoneyExcept;
 import dev.huntul.finalfuntasy.shop.Shop;
@@ -31,7 +32,6 @@ public class Game {
 	private Scanner in;
 	private PosInfo pInfo;
 	private ObjectInputStream objectInputStream;
-	private CharacterGame character;
 	private Shop shop;
 	
 	public Game() {
@@ -81,6 +81,20 @@ public class Game {
 				if (pInfo.cekItem(pemain.getPosisi().getX(),pemain.getPosisi().getY())) {
 					pInfo.lootItem(pemain.getPosisi().getX(),pemain.getPosisi().getY());
 					pemain.addItem(ItemFactory.createItem());
+				}
+				if (pInfo.cekMonster(pemain.getPosisi().getX(),pemain.getPosisi().getY())) {
+					int k = (new Battle()).runBattle(pemain,MonsterFactory.createMonster(pemain.getCharacters()[0],pemain.getCharacters()[1],pemain.getCharacters()[2]));
+					if(k==1){
+						System.out.println("Congratulation!");
+						pInfo.rePlotMonster(pemain.getPosisi().getX(),pemain.getPosisi().getY());
+						printMap(arena.getHeight(),arena.getWidth());
+						
+					}
+					else{
+						System.out.println("Game Over!");
+						return;
+					}
+					
 				}
 				System.out.println();
 				System.out.print("COMMAND : ");
@@ -150,6 +164,8 @@ public class Game {
 						
 						System.out.println("--- " + pemain.getCharacters()[0].getNama() + " Status ---");
 						System.out.println("Level	 	: " + pemain.getCharacters()[0].getLV());
+						System.out.println("HP		: " + pemain.getCharacters()[0].getCurHP() + "/" + pemain.getCharacters()[0].getMaxHP());
+						System.out.println("MP		: " + pemain.getCharacters()[0].getCurMP() + "/" + pemain.getCharacters()[0].getMaxMP());
 						System.out.println("STR 		: " + pemain.getCharacters()[0].getSTR());
 						System.out.println("VIT 		: " + pemain.getCharacters()[0].getVIT());
 						System.out.println("INT 		: " + pemain.getCharacters()[0].getINT());
@@ -157,6 +173,8 @@ public class Game {
 						
 						System.out.println("--- " + pemain.getCharacters()[1].getNama() + " Status ---");
 						System.out.println("Level	 	: " + pemain.getCharacters()[1].getLV());
+						System.out.println("HP		: " + pemain.getCharacters()[1].getCurHP() + "/" + pemain.getCharacters()[0].getMaxHP());
+						System.out.println("MP		: " + pemain.getCharacters()[1].getCurMP() + "/" + pemain.getCharacters()[0].getMaxMP());
 						System.out.println("STR 		: " + pemain.getCharacters()[1].getSTR());
 						System.out.println("VIT 		: " + pemain.getCharacters()[1].getVIT());
 						System.out.println("INT 		: " + pemain.getCharacters()[1].getINT());
@@ -164,6 +182,8 @@ public class Game {
 						
 						System.out.println("--- " + pemain.getCharacters()[2].getNama() + " Status ---");
 						System.out.println("Level	 	: " + pemain.getCharacters()[2].getLV());
+						System.out.println("HP		: " + pemain.getCharacters()[2].getCurHP() + "/" + pemain.getCharacters()[0].getMaxHP());
+						System.out.println("MP		: " + pemain.getCharacters()[2].getCurMP() + "/" + pemain.getCharacters()[0].getMaxMP());
 						System.out.println("STR 		: " + pemain.getCharacters()[2].getSTR());
 						System.out.println("VIT 		: " + pemain.getCharacters()[2].getVIT());
 						System.out.println("INT 		: " + pemain.getCharacters()[2].getINT());
@@ -209,6 +229,14 @@ public class Game {
 						error = true;
 						break;
 					}
+					
+					case "m" 	: {			
+						printMap(arena.getHeight(),arena.getWidth());
+						System.out.println();
+						error = true;
+						break;
+					}
+					
 					default		: {
 						System.out.println("Command not found!");
 						error = true;
