@@ -21,4 +21,5 @@ public class Stock implements Serializable {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	
 }
