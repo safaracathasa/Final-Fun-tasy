@@ -42,7 +42,7 @@ public class Shop {
 		System.out.println("Terima kasih!");
 		int i = 0;
 		while (pemain.getStocks()[i] != null) {
-			if (item.getName() == pemain.getStocks()[i].getItem().getName()) {
+			if (item.getName().equals(pemain.getStocks()[i].getItem().getName())) {
 				pemain.getStocks()[i].setStock(pemain.getStocks()[i].getStock()+1);
 				return;
 			}
