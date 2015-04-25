@@ -15,7 +15,7 @@ public abstract class Monster {
     
     public Monster (String name, CharacterGame chars1,CharacterGame chars2,CharacterGame chars3)
     {
-        int x = (int)(1+(chars1.getLV()+chars2.getLV()+chars3.getLV())/5);
+        int x = (int)(1+(chars1.getLV()+chars2.getLV()+chars3.getLV())/4);
         this.name = name;
         this.ATK = x;
         this.maxHP = x;
@@ -52,14 +52,41 @@ public abstract class Monster {
         return this.CurHP;
     }
     
+    public void setName(String name) {
+    	this.name = name;
+    }
+    
+    public String getName() {
+    	return this.name;
+    }
+    
+    public int getIncLevel(){
+    	return incLevel;
+    }
+    public void setIncLevel(int i){
+    	incLevel = i;
+    }
+    
+    public void setMoney(int money)
+    {
+        this.money = money;
+    }
+    public int getMoney()
+    {
+        return this.money;
+    }
+    
     //method
     public void useAttack(CharacterGame chars)
     {
         chars.setCurHP(chars.getCurHP() - ATK);
+        System.out.println("Hit " + getATK() + " damage!");
     }
     
     public void giveMoney(Pemain P)
     {
         P.setMoney(P.getMoney() + money);
     }
+    
+    public abstract void printMonster();
 }
