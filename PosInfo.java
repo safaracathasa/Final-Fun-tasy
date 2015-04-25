@@ -121,8 +121,8 @@ public class PosInfo implements Serializable {
             isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
     		if(isSameAsPemain){
     			do{
-	    			posMonsterX[i] = rand.nextInt(9);
-	                posMonsterY[i] = rand.nextInt(9);
+	    			posMonsterX[i] = rand.nextInt(10);
+	                posMonsterY[i] = rand.nextInt(10);
 	                isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
 	                isSameAsItemOrToko = cekItem(posMonsterX[i],posMonsterY[i]) || cekToko(posMonsterX[i],posMonsterY[i]);
 	                isSameAsOtherMonster = false;
@@ -144,8 +144,8 @@ public class PosInfo implements Serializable {
         Random rand = new Random();
         for(int i = 0;i<20;i++){
             do{
-                posMonsterX[i] = rand.nextInt(9);
-                posMonsterY[i] = rand.nextInt(9);
+                posMonsterX[i] = rand.nextInt(10);
+                posMonsterY[i] = rand.nextInt(10);
                 isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
                 isSameAsItemOrToko = cekItem(posMonsterX[i],posMonsterY[i]) || cekToko(posMonsterX[i],posMonsterY[i]);
                 isSameAsOtherMonster = false;
