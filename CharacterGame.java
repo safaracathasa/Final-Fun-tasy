@@ -19,69 +19,69 @@ public abstract class CharacterGame implements Serializable {
 
 	public CharacterGame(String nama, int s, int v, int i, String job)
 	{
-		this.namaChar 	= nama;
-		this.cSTR 		= s;
-		this.cVIT 		= v;
-		this.cINT 		= i;
-		this.maxHP 		= (10*v);
-		this.curHP 		= this.maxHP;	
-		this.maxMP		= (10*i);
-		this.curMP 		= this.maxMP;
-		this.cLV 		= 1;
-		this.job		= job;
+		namaChar	= nama;
+		cSTR 		= s;
+		cVIT 		= v;
+		cINT 		= i;
+		maxHP 		= (10*cVIT);
+		curHP 		= maxHP;	
+		maxMP		= (10*cINT);
+		curMP 		= maxMP;
+		cLV 		= 1;
+		this.job	= job;
 	}
 
 // GETTER
 
 	public String getNama()
 	{
-		return(this.namaChar);
+		return(namaChar);
 	}
 
 
 	public int getSTR()
 	{
-		return(this.cSTR);
+		return(cSTR);
 	}
 
 	public int getVIT()
 	{
-		return(this.cVIT);
+		return(cVIT);
 	}
 
 	public int getINT()
 	{
-		return(this.cINT);
+		return(cINT);
 	}
 
 	public int getMaxHP()
 	{
-		return(this.maxHP);
+		return(maxHP);
 	}
 
 	public int getMaxMP()
 	{
-		return(this.maxMP);
+		return(maxMP);
 	}
 
 	public int getCurHP()
 	{
-		return(this.curHP);
+		return(curHP);
 	}
 
 	public int getCurMP()
 	{
-		return(this.curMP);
+		return(curMP);
 	}
 
 	public int getLV()
 	{
-		return(this.cLV);
+		return(cLV);
 	}
 	
 	public String getJob()
 	{
-		return(this.job);
+		return(job);
 	}
 
 // SETTER
@@ -89,54 +89,54 @@ public abstract class CharacterGame implements Serializable {
 
 	public void setSTR(int x)
 	{
-		this.cSTR = x;
+		cSTR = x;
 	}
 
 	public void setVIT(int x)
 	{
-		this.cVIT = x;
+		cVIT = x;
 	}
 
 	public void setINT(int x)
 	{
-		this.cINT = x;
+		cINT = x;
 	}
 
 	public void setMaxHP(int x)
 	{
-		this.maxHP = x;
+		maxHP = x;
 	}
 
 	public void setMaxMP(int x)
 	{
-		this.maxMP = x;
+		maxMP = x;
 	}
 
 	public void setCurHP(int x)
 	{
-		this.curHP = x;
+		curHP = x;
 	}
 
 	public void setCurMP(int x)
 	{
-		this.curMP = x;
+		curMP = x;
 	}	
 
 	public void setLV(int x)
 	{
-		this.cLV = x;
+		cLV = x;
 	}
 
 // METHODE GET DAMAGE
 
 	public int damageAttack()
 	{
-		return(2*this.cSTR);
+		return(2*cSTR);
 	}
 
 	public int damageMagic()
 	{
-		return(2*this.cINT);
+		return(5*cINT);
 	}
 
 // METHODE
@@ -144,32 +144,42 @@ public abstract class CharacterGame implements Serializable {
 	public void useAttack(Monster mon)
 	{
 		mon.setCurHP(mon.getCurHP() - damageAttack());
+        System.out.println("Hit " + damageAttack() + " damage!");
 	}
 
 	public abstract void useMagic(Monster mon);
 
 	public void useItem(Item item, CharacterGame chars, Monster monster)
 	{
+		System.out.println(getNama() + " use " + item.getName());
 		item.effectItem(chars, monster);
 	}
-
+	
+	public void cekMP(int cost) throws OutOfManaExcept {
+		if (curMP - cost < 0) {
+			throw new OutOfManaExcept("Not enough MP!");
+		}
+	}
+	
 	public void levelUP(int lv)
 	{
-		// BELUM DI SET EXCEPTION KALAU LEVEL LEBIH DARI 40
-
-		this.cLV = this.cLV + lv;
+		if (cLV >= 40) {
+			return;
+		}
+		
+		cLV = cLV + lv;
 
 		float i;
 
-		if (this.cLV <= 10)
+		if (cLV <= 10)
 		{
 			i = 1;
 		}
-		else if ((this.cLV >= 11) && (this.cLV <=20))
+		else if ((cLV >= 11) && (cLV <=20))
 		{
 			i = (float) 1.2;
 		}
-		else if ((this.cLV >= 21) && (this.cLV <=30))
+		else if ((cLV >= 21) && (cLV <=30))
 		{
 			i = (float) 1.5;
 		}
@@ -178,18 +188,14 @@ public abstract class CharacterGame implements Serializable {
 			i = 2;
 		}
 
-		setSTR((int) (getSTR() + (getSTR()*i)));
+		setSTR((int) (getSTR() + (0.2*(getSTR()*i))));
 
-		setVIT((int) (getVIT() + (getVIT()*i)));
+		setVIT((int) (getVIT() + (0.2*(getVIT()*i))));
 
-		setINT((int) (getINT() + (getINT()*i)));
+		setINT((int) (getINT() + (0.2*(getINT()*i))));
 		
 		setMaxHP(getVIT() * 10);
-
-		setCurHP(getMaxHP());
 		
 		setMaxMP(getINT() * 10);
-
-		setCurMP(getMaxMP());
 	}
 }
