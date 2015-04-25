@@ -95,6 +95,13 @@ public class Game {
 					}
 					
 				}
+                                if (pInfo.cekFountain(pemain.getPosisi().getX(),pemain.getPosisi().getY())){
+                                    for(int i = 0;i<=2;i++){
+                                        pemain.getCharacters()[i].setCurHP(pemain.getCharacters()[i].getMaxHP());
+                                        pemain.getCharacters()[i].setCurMP(pemain.getCharacters()[i].getMaxMP());
+                                    }
+                                    System.out.println("\nHealed!\n");
+                                }
 				System.out.println();
 				System.out.print("COMMAND : ");
 				String cmd = in.next();
@@ -206,21 +213,25 @@ public class Game {
 						try {
 							pInfo.isToko(pemain.getPosisi().getX(),pemain.getPosisi().getY());
 							shop.showItem();
+                                                        System.out.println("\n0. Exit");
 							int pil;
 							do {
 								System.out.println();
 								System.out.print("Pilihan : ");
 								pil = in.nextInt();
-								if (pil > shop.getItems().length) {
+								if (pil > shop.getItems().length || pil < 0) {
 									System.out.println("Pilihan salah, ulangi!");
 								}
-							} while (pil > shop.getItems().length);
-							try {
+							} while (pil > shop.getItems().length || pil < 0);
+                                                        if(pil != 0){
+                                                            try {
 								shop.cekMoney(pemain.getMoney(),shop.getItems()[pil-1].getCost());
 								shop.buyItem(shop.getItems()[pil-1],pemain);
-							} catch (OutOfMoneyExcept e) {
+                                                            } catch (OutOfMoneyExcept e) {
 								e.response();
-							}
+                                                            }   
+                                                        }
+							
 						} catch (MismatchPositionExcept e) {
 							e.response();
 						}
@@ -312,6 +323,12 @@ public class Game {
 				return "x";
 			} else {
 				return "m";
+			}
+                } else if (pInfo.cekFountain(x,y)) {
+			if ((pemain.getPosisi().getX() == x) && (pemain.getPosisi().getY() == y)) {
+				return "x";
+			} else {
+				return "f";
 			}
 		} else {
 			if ((pemain.getPosisi().getX() == x) && (pemain.getPosisi().getY() == y)) {
