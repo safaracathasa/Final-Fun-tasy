@@ -14,6 +14,20 @@ public class PosInfo implements Serializable {
 	public PosInfo() {
 		
 	}
+        public boolean cekFountain(int x, int y) {
+            // KONSTANTA
+            int x1 = 2;
+            int y1 = 2;
+            
+            int x2 = 7;
+            int y2 = 7;
+            
+            boolean test1 = (x==x1 && y==y1);
+            boolean test2 = (x==x2 && y==y2);
+            
+            return(test1||test2);
+        }
+        
 	public boolean cekToko(int x, int y) {
         // Mengembalikan True jika posisi pemain tepat berada pada posisi toko
         // Silakan diedit bagian "KONSTANTA", menyesuaikan dengan kebutuhan
@@ -113,7 +127,7 @@ public class PosInfo implements Serializable {
     	iEff = iEff + 1;
     }
     public void rePlotMonster(int x, int y){
-    	boolean isSameAsItemOrToko;
+    	boolean isSameAsItemOrTokoOrFountain;
         boolean isSameAsOtherMonster;
         boolean isSameAsPemain;
     	Random rand = new Random();
@@ -121,23 +135,23 @@ public class PosInfo implements Serializable {
             isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
     		if(isSameAsPemain){
     			do{
-	    			posMonsterX[i] = rand.nextInt(10);
-	                posMonsterY[i] = rand.nextInt(10);
-	                isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
-	                isSameAsItemOrToko = cekItem(posMonsterX[i],posMonsterY[i]) || cekToko(posMonsterX[i],posMonsterY[i]);
-	                isSameAsOtherMonster = false;
-	                for(int j=0;j<20;j++){
+                            posMonsterX[i] = rand.nextInt(10);
+                            posMonsterY[i] = rand.nextInt(10);
+                            isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
+                            isSameAsItemOrTokoOrFountain = cekItem(posMonsterX[i],posMonsterY[i]) || cekToko(posMonsterX[i],posMonsterY[i]) || cekFountain(posMonsterX[i],posMonsterY[i]);
+                            isSameAsOtherMonster = false;
+                            for(int j=0;j<20;j++){
 	                	if(i!=j)
 	                		isSameAsOtherMonster = isSameAsOtherMonster || ((posMonsterX[i] == posMonsterX[j])&&(posMonsterY[i] == posMonsterY[j]));
 	                }
-    			}while(isSameAsItemOrToko || isSameAsOtherMonster || isSameAsPemain);
+    			}while(isSameAsItemOrTokoOrFountain || isSameAsOtherMonster || isSameAsPemain);
     			break;
     		}
     	}
     }
     public void plotMonster(int x, int y) {
         
-        boolean isSameAsItemOrToko;
+        boolean isSameAsItemOrTokoOrFountain;
         boolean isSameAsOtherMonster;
         boolean isSameAsPemain;
         
@@ -147,12 +161,12 @@ public class PosInfo implements Serializable {
                 posMonsterX[i] = rand.nextInt(10);
                 posMonsterY[i] = rand.nextInt(10);
                 isSameAsPemain = ((posMonsterX[i] == x) && (posMonsterY[i] == y));
-                isSameAsItemOrToko = cekItem(posMonsterX[i],posMonsterY[i]) || cekToko(posMonsterX[i],posMonsterY[i]);
+                isSameAsItemOrTokoOrFountain = cekItem(posMonsterX[i],posMonsterY[i]) || cekToko(posMonsterX[i],posMonsterY[i]) || cekFountain(posMonsterX[i],posMonsterY[i]);
                 isSameAsOtherMonster = false;
                 for(int j=0;j<i;j++){
                     isSameAsOtherMonster = isSameAsOtherMonster || ((posMonsterX[i] == posMonsterX[j])&&(posMonsterY[i] == posMonsterY[j]));
                 }
-            } while(isSameAsItemOrToko || isSameAsOtherMonster || isSameAsPemain);
+            } while(isSameAsItemOrTokoOrFountain || isSameAsOtherMonster || isSameAsPemain);
         }
     }
     public boolean cekMonster(int x, int y) {
