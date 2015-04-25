@@ -4,43 +4,61 @@ import dev.huntul.finalfuntasy.monster.Monster;
 
 public class PengendaliBulan extends CharacterGame
 {
-	public PengendaliBulan(String nama)
+	public PengendaliBulan(String nama, String job)
 	{
-		super(nama, 8, 10, 12, "Pengendali Bulan");
+		super(nama, 8, 10, 12, job);
 	}
-
-	public int damageMagic()
-	{
-		return(3*this.cINT);
-	}
-
 
 	public void useMagic(Monster mon)
 	{
 
-		if (this.cLV <= 10)
+		if (cLV <= 10)
 		{
-			System.out.println("Moon!");
-			curMP = curMP - 20;
-			mon.setCurHP(mon.getCurHP() - damageMagic());
+			try {
+				cekMP(20);
+				curMP = curMP - 30;
+				System.out.println("Moon!");
+				mon.setCurHP(mon.getCurHP() - damageMagic());
+		        System.out.println("Hit " + damageMagic() + " damage!");
+			} catch (OutOfManaExcept e) {
+				e.response();
+			}
 		}
-		else if ((this.cLV >= 11) && (this.cLV <=20))
+		else if ((cLV >= 11) && (cLV <=20))
 		{
-			System.out.println("Moona!");
-			curMP = curMP - 30;
-			mon.setCurHP(mon.getCurHP() - damageMagic() - 20);
+			try {
+				cekMP(30);
+				curMP = curMP - 50;
+				System.out.println("Moona!");
+				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*1.2));
+		        System.out.println("Hit " + damageMagic()*1.2 + " damage!");
+			} catch (OutOfManaExcept e) {
+				e.response();
+			}
 		}
-		else if ((this.cLV >= 21) && (this.cLV <=30))
+		else if ((cLV >= 21) && (cLV <=30))
 		{
-			System.out.println("Moonaga!");
-			curMP = curMP - 40;
-			mon.setCurHP(mon.getCurHP() - damageMagic() - 50);
+			try {
+				cekMP(40);
+				curMP = curMP - 75;
+				System.out.println("Moonaga!");
+				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*1.5));
+		        System.out.println("Hit " + damageMagic()*1.5 + " damage!");
+			} catch (OutOfManaExcept e) {
+				e.response();
+			}
 		}
 		else 
 		{
-			System.out.println("Gerhana Bulan!");
-			curMP = curMP - 50;
-			mon.setCurHP(mon.getCurHP() - damageMagic() - 100);
+			try {
+				cekMP(50);
+				curMP = curMP - 100;
+				System.out.println("Gerhana Bulan!");
+				mon.setCurHP((mon.getCurHP() - damageMagic()*2));
+		        System.out.println("Hit " + damageMagic()*2 + " damage!");
+			} catch (OutOfManaExcept e) {
+				e.response();
+			}
 		}		
 	}
 }
