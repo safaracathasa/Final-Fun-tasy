@@ -8,7 +8,8 @@ import dev.huntul.finalfuntasy.monster.Monster;
 public abstract class Item implements Serializable {
 	protected int value;
 	protected int cost;
-	private String name;
+	protected int type;
+	protected String name;
 	public Item(String name, int value, int cost) {
 		this.value = value;
 		this.cost = cost;
@@ -33,4 +34,10 @@ public abstract class Item implements Serializable {
 		this.name = name;
 	}
 	public abstract void effectItem(CharacterGame chars, Monster monster);
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
 }
