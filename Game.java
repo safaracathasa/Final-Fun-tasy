@@ -41,13 +41,13 @@ public class Game {
 		CharacterGame[] characters = new CharacterGame[3];
 		System.out.print("Nama Pengendali Bumi : ");
 		String char1 = in.next();
-		characters[0] = new PengendaliBumi(char1);
+		characters[0] = new PengendaliBumi(char1,"Pengendali Bumi");
 		System.out.print("Nama Pengendali Bulan : ");
 		String char2 = in.next();
-		characters[1] = new PengendaliBulan(char2);
+		characters[1] = new PengendaliBulan(char2,"Pengendali Bulan");
 		System.out.print("Nama Pengendali Matahari : ");
 		String char3 = in.next();
-		characters[2] = new PengendaliMatahari(char3);
+		characters[2] = new PengendaliMatahari(char3,"Pengendali Matahari");
 		pemain = new Pemain(characters);
 		arena = new Arena(10,10);
 		pInfo = new PosInfo();
@@ -85,7 +85,6 @@ public class Game {
 				if (pInfo.cekMonster(pemain.getPosisi().getX(),pemain.getPosisi().getY())) {
 					int k = (new Battle()).runBattle(pemain,MonsterFactory.createMonster(pemain.getCharacters()[0],pemain.getCharacters()[1],pemain.getCharacters()[2]));
 					if(k==1){
-						System.out.println("Congratulation!");
 						pInfo.rePlotMonster(pemain.getPosisi().getX(),pemain.getPosisi().getY());
 						printMap(arena.getHeight(),arena.getWidth());
 						
@@ -173,8 +172,8 @@ public class Game {
 						
 						System.out.println("--- " + pemain.getCharacters()[1].getNama() + " Status ---");
 						System.out.println("Level	 	: " + pemain.getCharacters()[1].getLV());
-						System.out.println("HP		: " + pemain.getCharacters()[1].getCurHP() + "/" + pemain.getCharacters()[0].getMaxHP());
-						System.out.println("MP		: " + pemain.getCharacters()[1].getCurMP() + "/" + pemain.getCharacters()[0].getMaxMP());
+						System.out.println("HP		: " + pemain.getCharacters()[1].getCurHP() + "/" + pemain.getCharacters()[1].getMaxHP());
+						System.out.println("MP		: " + pemain.getCharacters()[1].getCurMP() + "/" + pemain.getCharacters()[1].getMaxMP());
 						System.out.println("STR 		: " + pemain.getCharacters()[1].getSTR());
 						System.out.println("VIT 		: " + pemain.getCharacters()[1].getVIT());
 						System.out.println("INT 		: " + pemain.getCharacters()[1].getINT());
@@ -182,8 +181,8 @@ public class Game {
 						
 						System.out.println("--- " + pemain.getCharacters()[2].getNama() + " Status ---");
 						System.out.println("Level	 	: " + pemain.getCharacters()[2].getLV());
-						System.out.println("HP		: " + pemain.getCharacters()[2].getCurHP() + "/" + pemain.getCharacters()[0].getMaxHP());
-						System.out.println("MP		: " + pemain.getCharacters()[2].getCurMP() + "/" + pemain.getCharacters()[0].getMaxMP());
+						System.out.println("HP		: " + pemain.getCharacters()[2].getCurHP() + "/" + pemain.getCharacters()[2].getMaxHP());
+						System.out.println("MP		: " + pemain.getCharacters()[2].getCurMP() + "/" + pemain.getCharacters()[2].getMaxMP());
 						System.out.println("STR 		: " + pemain.getCharacters()[2].getSTR());
 						System.out.println("VIT 		: " + pemain.getCharacters()[2].getVIT());
 						System.out.println("INT 		: " + pemain.getCharacters()[2].getINT());
