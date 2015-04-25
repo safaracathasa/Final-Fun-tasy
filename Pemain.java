@@ -59,7 +59,7 @@ public class Pemain implements Serializable {
 		System.out.println("Acquired " + item.getName() + "!");
 		int i = 0;
 		while (stocks[i] != null) {
-			if (item.getName() == stocks[i].getItem().getName()) {
+			if (item.getName().equals(stocks[i].getItem().getName())) {
 				stocks[i].setStock(stocks[i].getStock()+1);
 				return;
 			}
@@ -71,7 +71,7 @@ public class Pemain implements Serializable {
 	public void delItem(Item item){
 		int i = 0;
 		while (stocks[i] != null) {
-			if (item.getName() == stocks[i].getItem().getName()) {
+			if (item.getName().equals(stocks[i].getItem().getName())) {
 				if (stocks[i].getStock() > 1) {
 					stocks[i].setStock(stocks[i].getStock() - 1);
 					return;
@@ -79,6 +79,7 @@ public class Pemain implements Serializable {
 					int j = i;
 					for (int k = j+1; k < 100; k++) {
 						stocks[j] = stocks[k];
+						j++;
 						if (k == 99) {
 							stocks[k] = null;
 							return;
