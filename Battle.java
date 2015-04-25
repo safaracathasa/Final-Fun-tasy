@@ -163,7 +163,7 @@ public class Battle{
         	for(int i = 0;i<=2;i++){
         		if(!isCharacterDied(P.getCharacters()[i])){
         			int j = 0;
-        			while ((j <= M.getIncLevel()) && (P.getCharacters()[i].getLV() < 40)) {
+        			while ((j < M.getIncLevel()) && (P.getCharacters()[i].getLV() < 40)) {
         				j++;
         				P.getCharacters()[i].levelUP(1);
         			}
