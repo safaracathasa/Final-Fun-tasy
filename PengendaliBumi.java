@@ -4,37 +4,61 @@ import dev.huntul.finalfuntasy.monster.Monster;
 
 public class PengendaliBumi extends CharacterGame
 {
-	public PengendaliBumi(String nama)
+	public PengendaliBumi(String nama, String job)
 	{
-		super(nama, 12, 10, 8, "Pengendali Bumi");
+		super(nama, 12, 10, 8, job);
 	}
 
 	public void useMagic(Monster mon)
 	{
 
-		if (this.cLV <= 10)
+		if (cLV <= 10)
 		{
-			System.out.println("Terre!");
-			curMP = curMP - 20;
-			mon.setCurHP(mon.getCurHP() - damageMagic());
+			try {
+				cekMP(20);
+				curMP = curMP - 30;
+				System.out.println("Terre!");
+				mon.setCurHP(mon.getCurHP() - damageMagic());
+		        System.out.println("Hit " + damageMagic() + " damage!");
+			} catch (OutOfManaExcept e) {
+				e.response();
+			}
 		}
-		else if ((this.cLV >= 11) && (this.cLV <=20))
+		else if ((cLV >= 11) && (cLV <=20))
 		{
-			System.out.println("Terra!");
-			curMP = curMP - 30;
-			mon.setCurHP(mon.getCurHP() - damageMagic() - 20);
+			try {
+				cekMP(30);
+				curMP = curMP - 50;
+				System.out.println("Terra!");
+				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*1.2));
+		        System.out.println("Hit " + damageMagic()*1.2 + " damage!");
+			} catch (OutOfManaExcept e) {
+				e.response();
+			}
 		}
-		else if ((this.cLV >= 21) && (this.cLV <=30))
+		else if ((cLV >= 21) && (cLV <=30))
 		{
-			System.out.println("Terraga!");
-			curMP = curMP - 40;
-			mon.setCurHP(mon.getCurHP() - damageMagic() - 50);
+			try {
+				cekMP(40);
+				curMP = curMP - 75;
+				System.out.println("Terraga!");
+				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*1.5));
+		        System.out.println("Hit " + damageMagic()*1.5 + " damage!");
+			} catch (OutOfManaExcept e) {
+				e.response();
+			}
 		}
 		else 
 		{
-			System.out.println("Armageddon!");
-			curMP = curMP - 50;
-			mon.setCurHP(mon.getCurHP() - damageMagic() - 100);
+			try {
+				cekMP(50);
+				curMP = curMP - 100;
+				System.out.println("Armageddon!");
+				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*2));
+		        System.out.println("Hit " + damageMagic()*2 + " damage!");
+			} catch (OutOfManaExcept e) {
+				e.response();
+			}
 		}		
 	}
 }
