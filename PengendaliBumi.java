@@ -15,7 +15,7 @@ public class PengendaliBumi extends CharacterGame
 		if (cLV <= 10)
 		{
 			try {
-				cekMP(20);
+				cekMP(30);
 				curMP = curMP - 30;
 				System.out.println("Terre!");
 				mon.setCurHP(mon.getCurHP() - damageMagic());
@@ -27,7 +27,7 @@ public class PengendaliBumi extends CharacterGame
 		else if ((cLV >= 11) && (cLV <=20))
 		{
 			try {
-				cekMP(30);
+				cekMP(50);
 				curMP = curMP - 50;
 				System.out.println("Terra!");
 				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*1.2));
@@ -39,7 +39,7 @@ public class PengendaliBumi extends CharacterGame
 		else if ((cLV >= 21) && (cLV <=30))
 		{
 			try {
-				cekMP(40);
+				cekMP(75);
 				curMP = curMP - 75;
 				System.out.println("Terraga!");
 				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*1.5));
@@ -51,7 +51,7 @@ public class PengendaliBumi extends CharacterGame
 		else 
 		{
 			try {
-				cekMP(50);
+				cekMP(100);
 				curMP = curMP - 100;
 				System.out.println("Armageddon!");
 				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*2));
