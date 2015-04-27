@@ -1,4 +1,4 @@
-package dev.huntul.finalfuntasy.etc;
+package finalfuntasy.etc;
 import java.io.Serializable;
 import java.util.Random;
 
