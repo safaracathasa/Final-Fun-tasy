@@ -1,4 +1,4 @@
-package dev.huntul.finalfuntasy.arena;
+package finalfuntasy.arena;
 
 public class OutOfArenaExcept extends Exception {
 	private static int jml_except = 0;
