@@ -1,11 +1,11 @@
-package dev.huntul.finalfuntasy;
+package finalfuntasy;
 
 import java.util.Random;
 import java.util.Scanner;
 
-import dev.huntul.finalfuntasy.character.CharacterGame;
-import dev.huntul.finalfuntasy.monster.Monster;
-import dev.huntul.finalfuntasy.pemain.Pemain;
+import finalfuntasy.character.CharacterGame;
+import finalfuntasy.monster.Monster;
+import finalfuntasy.pemain.Pemain;
 
 public class Battle{ 
     Random rand = new Random();
