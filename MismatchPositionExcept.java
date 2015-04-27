@@ -1,4 +1,4 @@
-package dev.huntul.finalfuntasy.etc;
+package finalfuntasy.etc;
 
 public class MismatchPositionExcept extends Exception {
 	MismatchPositionExcept(String msg) {
