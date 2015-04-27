@@ -1,4 +1,4 @@
-package dev.huntul.finalfuntasy.character;
+package finalfuntasy.character;
 
 public class OutOfManaExcept extends Exception {
 	OutOfManaExcept(String msg) {
