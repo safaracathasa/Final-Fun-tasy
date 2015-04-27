@@ -1,9 +1,9 @@
-package dev.huntul.finalfuntasy.item;
+package finalfuntasy.item;
 
 import java.io.Serializable;
 
-import dev.huntul.finalfuntasy.character.CharacterGame;
-import dev.huntul.finalfuntasy.monster.Monster;
+import finalfuntasy.character.CharacterGame;
+import finalfuntasy.monster.Monster;
 
 public abstract class Item implements Serializable {
 	protected int value;
