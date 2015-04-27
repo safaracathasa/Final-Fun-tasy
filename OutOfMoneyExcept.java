@@ -1,4 +1,4 @@
-package dev.huntul.finalfuntasy.shop;
+package finalfuntasy.shop;
 
 public class OutOfMoneyExcept extends Exception {
 	OutOfMoneyExcept(String msg) {
