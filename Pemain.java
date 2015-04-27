@@ -1,11 +1,11 @@
-package dev.huntul.finalfuntasy.pemain;
+package finalfuntasy.pemain;
 
 import java.io.Serializable;
 
-import dev.huntul.finalfuntasy.character.CharacterGame;
-import dev.huntul.finalfuntasy.etc.Point;
-import dev.huntul.finalfuntasy.item.Item;
-import dev.huntul.finalfuntasy.item.Stock;
+import finalfuntasy.character.CharacterGame;
+import finalfuntasy.etc.Point;
+import finalfuntasy.item.Item;
+import finalfuntasy.item.Stock;
 
 public class Pemain implements Serializable {
 	private Point posisi;
