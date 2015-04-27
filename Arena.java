@@ -1,4 +1,4 @@
-package dev.huntul.finalfuntasy.arena;
+package finalfuntasy.arena;
 
 public class Arena {
 	private int width;
