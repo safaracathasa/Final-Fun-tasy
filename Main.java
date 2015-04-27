@@ -1,4 +1,4 @@
-package dev.huntul.finalfuntasy;
+package finalfuntasy;
 
 import java.util.Scanner;
 
