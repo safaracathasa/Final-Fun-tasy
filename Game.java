@@ -1,19 +1,19 @@
-package dev.huntul.finalfuntasy;
+package finalfuntasy;
 
-import dev.huntul.finalfuntasy.arena.Arena;
-import dev.huntul.finalfuntasy.arena.OutOfArenaExcept;
-import dev.huntul.finalfuntasy.character.CharacterGame;
-import dev.huntul.finalfuntasy.character.PengendaliBulan;
-import dev.huntul.finalfuntasy.character.PengendaliBumi;
-import dev.huntul.finalfuntasy.character.PengendaliMatahari;
-import dev.huntul.finalfuntasy.etc.MismatchPositionExcept;
-import dev.huntul.finalfuntasy.etc.PosInfo;
-import dev.huntul.finalfuntasy.item.Item;
-import dev.huntul.finalfuntasy.item.ItemFactory;
-import dev.huntul.finalfuntasy.monster.MonsterFactory;
-import dev.huntul.finalfuntasy.pemain.Pemain;
-import dev.huntul.finalfuntasy.shop.OutOfMoneyExcept;
-import dev.huntul.finalfuntasy.shop.Shop;
+import finalfuntasy.arena.Arena;
+import finalfuntasy.arena.OutOfArenaExcept;
+import finalfuntasy.character.CharacterGame;
+import finalfuntasy.character.PengendaliBulan;
+import finalfuntasy.character.PengendaliBumi;
+import finalfuntasy.character.PengendaliMatahari;
+import finalfuntasy.etc.MismatchPositionExcept;
+import finalfuntasy.etc.PosInfo;
+import finalfuntasy.item.Item;
+import finalfuntasy.item.ItemFactory;
+import finalfuntasy.monster.MonsterFactory;
+import finalfuntasy.pemain.Pemain;
+import finalfuntasy.shop.OutOfMoneyExcept;
+import finalfuntasy.shop.Shop;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
