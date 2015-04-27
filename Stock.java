@@ -1,4 +1,4 @@
-package dev.huntul.finalfuntasy.item;
+package finalfuntasy.item;
 
 import java.io.Serializable;
 
