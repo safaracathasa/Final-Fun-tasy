@@ -1,6 +1,6 @@
-package dev.huntul.finalfuntasy.character;
+package finalfuntasy.character;
 
-import dev.huntul.finalfuntasy.monster.Monster;
+import finalfuntasy.monster.Monster;
 
 public class PengendaliMatahari extends CharacterGame
 {
@@ -15,8 +15,8 @@ public class PengendaliMatahari extends CharacterGame
 		if (cLV <= 10)
 		{
 			try {
-				cekMP(30);
-				curMP = curMP - 30;
+				cekMP(25+3*cLV);
+				curMP = curMP - (25+3*cLV);
 				System.out.println("Sun!");
 				mon.setCurHP(mon.getCurHP() - damageMagic());
 		        System.out.println("Hit " + damageMagic() + " damage!");
@@ -27,11 +27,11 @@ public class PengendaliMatahari extends CharacterGame
 		else if ((cLV >= 11) && (cLV <=20))
 		{
 			try {
-				cekMP(50);
-				curMP = curMP - 50;
+				cekMP(65+10*(cLV-10));
+				curMP = curMP - (65+10*(cLV-10));
 				System.out.println("Suna!");
-				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*1.2));
-		        System.out.println("Hit " + damageMagic()*1.2 + " damage!");
+				mon.setCurHP(mon.getCurHP() - (int)(damageMagic()*1.2));
+		        System.out.println("Hit " + (int)(damageMagic()*1.2) + " damage!");
 			} catch (OutOfManaExcept e) {
 				e.response();
 			}
@@ -39,11 +39,11 @@ public class PengendaliMatahari extends CharacterGame
 		else if ((cLV >= 21) && (cLV <=30))
 		{
 			try {
-				cekMP(75);
-				curMP = curMP - 75;
+				cekMP(165+20*(cLV-20));
+				curMP = curMP - (165+20*(cLV-20));
 				System.out.println("Sunaga!");
-				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*1.5));
-		        System.out.println("Hit " + damageMagic()*1.5 + " damage!");
+				mon.setCurHP(mon.getCurHP() - (int)(damageMagic()*1.5));
+		        System.out.println("Hit " + (int)(damageMagic()*1.5) + " damage!");
 			} catch (OutOfManaExcept e) {
 				e.response();
 			}
@@ -51,10 +51,10 @@ public class PengendaliMatahari extends CharacterGame
 		else 
 		{
 			try {
-				cekMP(100);
-				curMP = curMP - 100;
+				cekMP(365+35*(cLV-30));
+				curMP = curMP - (365+35*(cLV-30));
 				System.out.println("Gerhana Matahari!");
-				mon.setCurHP((int) (mon.getCurHP() - damageMagic()*2));
+				mon.setCurHP((mon.getCurHP() - damageMagic()*2));
 		        System.out.println("Hit " + damageMagic()*2 + " damage!");
 			} catch (OutOfManaExcept e) {
 				e.response();
