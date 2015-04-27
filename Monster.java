@@ -1,11 +1,12 @@
-package dev.huntul.finalfuntasy.monster;
+package finalfuntasy.monster;
 
-import dev.huntul.finalfuntasy.character.CharacterGame;
-import dev.huntul.finalfuntasy.pemain.Pemain;
+import finalfuntasy.character.CharacterGame;
+import finalfuntasy.pemain.Pemain;
+import java.util.Random;
 
 public abstract class Monster {
 
-	protected String name;
+    protected String name;
     protected int ATK;
     protected int maxHP;
     protected int CurHP;
@@ -15,7 +16,7 @@ public abstract class Monster {
     
     public Monster (String name, CharacterGame chars1,CharacterGame chars2,CharacterGame chars3)
     {
-        int x = (int)(1+(chars1.getLV()+chars2.getLV()+chars3.getLV())/4);
+        int x = (int)((chars1.getLV()+chars2.getLV()+chars3.getLV())/3);
         this.name = name;
         this.ATK = x;
         this.maxHP = x;
@@ -79,8 +80,9 @@ public abstract class Monster {
     //method
     public void useAttack(CharacterGame chars)
     {
-        chars.setCurHP(chars.getCurHP() - ATK);
-        System.out.println("Hit " + getATK() + " damage!");
+        int dmg =(int)(ATK*0.5 + ATK*randomProb()*0.5);
+        chars.setCurHP(chars.getCurHP() - dmg);
+        System.out.println("Hit " + dmg + " damage!");
     }
     
     public void giveMoney(Pemain P)
@@ -89,4 +91,10 @@ public abstract class Monster {
     }
     
     public abstract void printMonster();
+
+
+    private float randomProb(){
+        Random rand = new Random();
+        return (rand.nextInt(100)/100f);
+    }
 }
