@@ -1,8 +1,8 @@
-package dev.huntul.finalfuntasy.monster;
+package finalfuntasy.monster;
 
 import java.util.Random;
 
-import dev.huntul.finalfuntasy.character.CharacterGame;
+import finalfuntasy.character.CharacterGame;
 
 public class MonsterFactory {
 	public static Monster createMonster(CharacterGame chars1,CharacterGame chars2,CharacterGame chars3) {
