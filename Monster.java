@@ -80,7 +80,7 @@ public abstract class Monster {
     //method
     public void useAttack(CharacterGame chars)
     {
-        int dmg =(int)(ATK*0.5 + ATK*randomProb()*0.5);
+        int dmg =(int)(ATK*0.8 + ATK*randomProb()*0.2);
         chars.setCurHP(chars.getCurHP() - dmg);
         System.out.println("Hit " + dmg + " damage!");
     }
