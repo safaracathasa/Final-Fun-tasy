@@ -95,6 +95,6 @@ public abstract class Monster {
 
     private float randomProb(){
         Random rand = new Random();
-        return (rand.nextInt(100)/100f);
+        return (rand.nextInt(101)/100f);
     }
 }
