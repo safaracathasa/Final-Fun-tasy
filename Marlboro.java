@@ -1,15 +1,15 @@
-package dev.huntul.finalfuntasy.monster;
+package finalfuntasy.monster;
 
-import dev.huntul.finalfuntasy.character.CharacterGame;
+import finalfuntasy.character.CharacterGame;
 
 public class Marlboro extends Monster {
 
     public Marlboro(CharacterGame chars1,CharacterGame chars2,CharacterGame chars3)
     {
         super("Marlboro",chars1,chars2,chars3);
-        this.ATK = (this.ATK*8)+15;
-        this.maxHP = (this.maxHP*70)+400;
-        this.CurHP = (this.CurHP*70)+400;
+        this.ATK = (this.ATK*15)+15;
+        this.maxHP = (this.maxHP*400)+400;
+        this.CurHP = (this.CurHP*400)+400;
         this.money = (this.money*10)+120;
         this.incLevel = 4;
     }
