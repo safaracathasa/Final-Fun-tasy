@@ -1,9 +1,10 @@
-package dev.huntul.finalfuntasy.character;
+package finalfuntasy.character;
 
 import java.io.Serializable;
+import java.util.Random;
 
-import dev.huntul.finalfuntasy.item.Item;
-import dev.huntul.finalfuntasy.monster.Monster;
+import finalfuntasy.item.Item;
+import finalfuntasy.monster.Monster;
 
 public abstract class CharacterGame implements Serializable {
 	protected String namaChar;
@@ -16,7 +17,7 @@ public abstract class CharacterGame implements Serializable {
 	protected int curHP;
 	protected int curMP;
 	protected String job;
-
+        
 	public CharacterGame(String nama, int s, int v, int i, String job)
 	{
 		namaChar	= nama;
@@ -30,7 +31,11 @@ public abstract class CharacterGame implements Serializable {
 		cLV 		= 1;
 		this.job	= job;
 	}
-
+        
+        private float randomProb(){
+            Random rand = new Random();
+            return (rand.nextInt(100)/100f);
+        }
 // GETTER
 
 	public String getNama()
@@ -131,12 +136,19 @@ public abstract class CharacterGame implements Serializable {
 
 	public int damageAttack()
 	{
-		return(2*cSTR);
+            int dmg = (int)(1.6*cSTR + 0.4*randomProb()*cSTR);
+            float chance = randomProb();
+            if(chance>0.9){
+                System.out.println("\nCRITICAL!");
+                dmg = dmg*2;
+            }
+		return dmg;
 	}
 
 	public int damageMagic()
 	{
-		return(5*cINT);
+            
+            return(int)(4*cINT + randomProb()*cINT);
 	}
 
 // METHODE
@@ -169,30 +181,11 @@ public abstract class CharacterGame implements Serializable {
 		
 		cLV = cLV + lv;
 
-		float i;
+		setSTR((int) (1 + getSTR() + (0.12*(getSTR()*(1-(cLV/41f))))));
 
-		if (cLV <= 10)
-		{
-			i = 1;
-		}
-		else if ((cLV >= 11) && (cLV <=20))
-		{
-			i = (float) 1.2;
-		}
-		else if ((cLV >= 21) && (cLV <=30))
-		{
-			i = (float) 1.5;
-		}
-		else 
-		{
-			i = 2;
-		}
+		setVIT((int) (1 + getVIT() + (0.11*(getVIT()*(1-(cLV/41f))))));
 
-		setSTR((int) (getSTR() + (0.2*(getSTR()*i))));
-
-		setVIT((int) (getVIT() + (0.2*(getVIT()*i))));
-
-		setINT((int) (getINT() + (0.2*(getINT()*i))));
+		setINT((int) (1 + getINT() + (0.1*(getINT()*(1-(cLV/41f))))));
 		
 		setMaxHP(getVIT() * 10);
 		
