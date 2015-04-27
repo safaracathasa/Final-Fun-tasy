@@ -1,15 +1,15 @@
-package dev.huntul.finalfuntasy.monster;
+package finalfuntasy.monster;
 
-import dev.huntul.finalfuntasy.character.CharacterGame;
+import finalfuntasy.character.CharacterGame;
 
 public class Behemoth extends Monster {
     
     public Behemoth(CharacterGame chars1,CharacterGame chars2,CharacterGame chars3)
     {
         super("Behemoth",chars1,chars2,chars3);
-        this.ATK = (this.ATK*5)+10;
-        this.maxHP = (this.maxHP*50)+250;
-        this.CurHP = (this.CurHP*50)+250;
+        this.ATK = (this.ATK*10)+10;
+        this.maxHP = (this.maxHP*250)+250;
+        this.CurHP = (this.CurHP*250)+250;
         this.money = (this.money*5)+80;
         this.incLevel = 2;
     }
