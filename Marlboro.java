@@ -11,7 +11,7 @@ public class Marlboro extends Monster {
         this.maxHP = (this.maxHP*400)+400;
         this.CurHP = (this.CurHP*400)+400;
         this.money = (this.money*10)+120;
-        this.incLevel = 4;
+        this.incLevel = 6;
     }
     
     public void printMonster() {
