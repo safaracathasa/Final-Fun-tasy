@@ -24,59 +24,79 @@ public class Battle{
         C.useAttack(M);
         System.out.println();
     }
-    public void magic(CharacterGame C, Monster M){
-        System.out.println();
-        System.out.println(C.getNama() + " menggunakan skill kepada " + M.getName());
-        C.useMagic(M);
-        System.out.println();
+    public int magic(CharacterGame C, Monster M){
+        int i = C.useMagic(M);
+        return i;
     }
-    public void item(Pemain P, Monster M,int j){
+    public int item(Pemain P, Monster M,int j){
+        boolean isDone = false;
+                
         System.out.println();
     	if (P.getStocks()[0] == null) {
             System.out.println("--- Inventory ---");
-			System.out.println("Empty");
-		} else {
-	        System.out.println("--- Inventory ---");
-			int i = 1;
-			while (P.getStocks()[i-1] != null) {
-				System.out.println(i + ". " + P.getStocks()[i-1].getItem().getName() + " : " + P.getStocks()[i-1].getStock());
-				i++;
-			}
-			int command, cmd;
-	        Scanner in = new Scanner(System.in);
-			do {
-				System.out.print("\nCommand : ");
-				command = in.nextInt();
-				if (command <1 || command > i-1) {
-					System.out.println("Command not found!");
-				}
-			} while (command < 1 || command > i-1);
-			if (P.getStocks()[command-1].getItem().getType() == 1) {
-				System.out.println("Choose target :");
-				for (int k = 1; k <= 3; k++) {
-					System.out.println(k + ". " + P.getCharacters()[k-1].getNama());
-				}
-				do {
-					System.out.print("\nCommand : ");
-					cmd = in.nextInt();
-					if (cmd <1 || cmd > 3) {
-						System.out.println("Command not found!");
-					}
-				} while (cmd < 1 || cmd > 3);
-				switch (cmd) {
-					case 1	: P.getCharacters()[j].useItem(P.getStocks()[command-1].getItem(), P.getCharacters()[0], M);
-							  break;
-					case 2	: P.getCharacters()[j].useItem(P.getStocks()[command-1].getItem(), P.getCharacters()[1], M);
-					  		  break;
-					case 3	: P.getCharacters()[j].useItem(P.getStocks()[command-1].getItem(), P.getCharacters()[2], M);
-							  break;
-				}
-			} else {
-				P.getCharacters()[j].useItem(P.getStocks()[command-1].getItem(), P.getCharacters()[j], M);
-			}
-			P.delItem(P.getStocks()[command-1].getItem());
-		}
-        System.out.println();
+            System.out.println("Empty");
+            return 0;
+	} else {
+            do{
+                System.out.println("--- Inventory ---");
+                int i = 1;
+                while (P.getStocks()[i-1] != null) {
+                    System.out.println(i + ". " + P.getStocks()[i-1].getItem().getName() + " : " + P.getStocks()[i-1].getStock());
+                    i++;
+                }
+                System.out.println("\n0. Exit");
+                int command, cmd;
+                Scanner in = new Scanner(System.in);
+                do {
+                    System.out.print("\nCommand : ");
+                    command = in.nextInt();
+                    if (command < 0 || command > i-1) {
+                        System.out.println("Command not found!");
+                    }
+                } while (command < 0 || command > i-1);
+                if(command == 0){
+                    return 0;
+                }
+                else if (P.getStocks()[command-1].getItem().getType() == 1) {
+                    System.out.println("Choose target :");
+                    for (int k = 1; k <= 3; k++) {
+                        System.out.println(k + ". " + P.getCharacters()[k-1].getNama());
+                    }
+                    System.out.println("\n0. Back");
+                    do {
+                        System.out.print("\nCommand : ");
+                        cmd = in.nextInt();
+                        if (cmd <0 || cmd > 3) {
+                            System.out.println("Command not found!");
+                        }
+                    } while (cmd < 0 || cmd > 3);
+                    switch (cmd) {
+                        case 1  :{
+                            P.getCharacters()[j].useItem(P.getStocks()[command-1].getItem(), P.getCharacters()[0], M);
+                            isDone = true;
+                            break;
+                        }
+                        case 2  :{
+                            P.getCharacters()[j].useItem(P.getStocks()[command-1].getItem(), P.getCharacters()[1], M);
+                            isDone = true;
+                            break;
+                        }
+                        case 3  :{
+                            P.getCharacters()[j].useItem(P.getStocks()[command-1].getItem(), P.getCharacters()[2], M);
+                            isDone = true;
+                            break;
+                        }
+                    }
+                } else {
+                    P.getCharacters()[j].useItem(P.getStocks()[command-1].getItem(), P.getCharacters()[j], M);
+                    isDone = true;
+                }
+                if(isDone){
+                    P.delItem(P.getStocks()[command-1].getItem());
+                }
+            } while(!isDone);
+            return 1;
+	}
     }
     public void monsterAttack(CharacterGame C, Monster M){
         System.out.println(M.getName()+ " Menyerang " + C.getNama());
@@ -101,7 +121,8 @@ public class Battle{
         System.out.println();
         M.printMonster();
         do{
-        	int j = 0;
+            int j = 0;
+            int k = 0;
             while((j <= 2) && !isMonsterDied(M)) {
                 if(!isCharacterDied(P.getCharacters()[j])){
                     isNextTurn = false;
@@ -118,13 +139,13 @@ public class Battle{
                                                 break;
                                             }
                                             case 2: {
-                                                magic(P.getCharacters()[j],M);
-                                                isNextTurn = true;
+                                                k = magic(P.getCharacters()[j],M);
+                                                isNextTurn = (k==1);
                                                 break;
                                             }
                                             case 3: {
-                                            	item(P,M,j);
-                                                isNextTurn = true;
+                                            	k = item(P,M,j);
+                                                isNextTurn = (k==1);
                                                 break;
                                             }
                                             default: {
@@ -136,7 +157,8 @@ public class Battle{
                 }
                 j++;
             }
-            
+                System.out.println("Tekan untuk melanjutkan...");
+                String delay = in.nextLine(); delay = in.nextLine();
                 if(isMonsterDied(M)){
                     statusBattle = 1;
                 }
