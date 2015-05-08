@@ -11,7 +11,7 @@ public class Behemoth extends Monster {
         this.maxHP = (this.maxHP*250)+250;
         this.CurHP = (this.CurHP*250)+250;
         this.money = (this.money*5)+80;
-        this.incLevel = 2;
+        this.incLevel = 3;
     }
     
     public void printMonster() {
