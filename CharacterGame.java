@@ -155,11 +155,12 @@ public abstract class CharacterGame implements Serializable {
 
 	public void useAttack(Monster mon)
 	{
-		mon.setCurHP(mon.getCurHP() - damageAttack());
-        System.out.println("Hit " + damageAttack() + " damage!");
+            int damage = damageAttack();
+            mon.setCurHP(mon.getCurHP() - damage);
+            System.out.println("Hit " + damage + " damage!");
 	}
 
-	public abstract void useMagic(Monster mon);
+	public abstract int useMagic(Monster mon);
 
 	public void useItem(Item item, CharacterGame chars, Monster monster)
 	{
