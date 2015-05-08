@@ -9,55 +9,71 @@ public class PengendaliBulan extends CharacterGame
 		super(nama, 8, 10, 12, job);
 	}
 
-	public void useMagic(Monster mon)
+	public int useMagic(Monster mon)
 	{
-
+                int reqMP;
 		if (cLV <= 10)
 		{
+                        reqMP = 25+3*cLV;
 			try {
-				cekMP(25+3*cLV);
-				curMP = curMP - (25+3*cLV);
+				cekMP(reqMP);
+				curMP = curMP - (reqMP);
+                                System.out.println("\n" + getNama() + " menggunakan skill kepada " + mon.getName()+"\n");
 				System.out.println("Moon!");
 				mon.setCurHP(mon.getCurHP() - damageMagic());
-		        System.out.println("Hit " + damageMagic() + " damage!");
+                                System.out.println("Hit " + damageMagic() + " damage!");
+                                return 1;
 			} catch (OutOfManaExcept e) {
 				e.response();
+                                return 0;
 			}
 		}
 		else if ((cLV >= 11) && (cLV <=20))
 		{
+                        reqMP = 55+6*(cLV-10);
 			try {
-				cekMP(65+10*(cLV-10));
-				curMP = curMP - (65+10*(cLV-10));
+				cekMP(reqMP);
+				curMP = curMP - (reqMP);
+                                System.out.println("\n" + getNama() + " menggunakan skill kepada " + mon.getName()+"\n");
 				System.out.println("Moona!");
 				mon.setCurHP(mon.getCurHP() - (int)(damageMagic()*1.2));
-		        System.out.println("Hit " + (int)(damageMagic()*1.2) + " damage!");
+                                System.out.println("Hit " + (int)(damageMagic()*1.2) + " damage!");
+                                return 1;
 			} catch (OutOfManaExcept e) {
 				e.response();
+                                return 0;
 			}
 		}
 		else if ((cLV >= 21) && (cLV <=30))
 		{
+                        reqMP = 115+10*(cLV-20);
 			try {
-				cekMP(165+20*(cLV-20));
-				curMP = curMP - (165+20*(cLV-20));
+				cekMP(reqMP);
+				curMP = curMP - (reqMP);
+                                System.out.println("\n" + getNama() + " menggunakan skill kepada " + mon.getName()+"\n");
 				System.out.println("Moonaga!");
 				mon.setCurHP(mon.getCurHP() - (int)(damageMagic()*1.5));
-		        System.out.println("Hit " + (int)(damageMagic()*1.5) + " damage!");
+                                System.out.println("Hit " + (int)(damageMagic()*1.5) + " damage!");
+                                return 1;
 			} catch (OutOfManaExcept e) {
 				e.response();
+                                return 0;
 			}
 		}
 		else 
 		{
+                        reqMP = 215+15*(cLV-30);
 			try {
-				cekMP(365+35*(cLV-30));
-				curMP = curMP - (365+35*(cLV-30));
+                                cekMP(reqMP);
+				curMP = curMP - (reqMP);
+                                System.out.println("\n" + getNama() + " menggunakan skill kepada " + mon.getName()+"\n");
 				System.out.println("Gerhana Bulan!");
 				mon.setCurHP((mon.getCurHP() - damageMagic()*2));
-		        System.out.println("Hit " + damageMagic()*2 + " damage!");
+                                System.out.println("Hit " + damageMagic()*2 + " damage!");
+                                return 1;
 			} catch (OutOfManaExcept e) {
 				e.response();
+                                return 0;
 			}
 		}		
 	}
