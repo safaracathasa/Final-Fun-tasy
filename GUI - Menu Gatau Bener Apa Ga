@@ -1,0 +1,170 @@
+package finalfantasy.main;
+
+import finalfantasy.display.DisplayMenu;
+import finalfantasy.input.KeyManager;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+
+public class State implements Runnable {
+    private boolean running, enterEvent, keyPressed;
+    private Thread thread;
+    private String title;
+    private int height, width, x, y, timer, enter, cursorPos;
+    private DisplayMenu display;
+    private BufferStrategy bs;
+    private BufferedImage logo, cursor;
+    private Graphics g;
+    private KeyManager keyManager;
+
+    private int currentOption = 0;
+    private String[] options = {
+		"Inventory",
+		"Status",
+                "Save Game",
+                "Exit Game"
+	};
+    
+    public State (String title, int height, int width) {
+	this.title = title;
+	this.height = height;
+	this.width = width;
+	keyManager = new KeyManager();
+	}
+	
+	public void init() {
+	display = new DisplayMenu(title,height,width);
+	display.getCanvas().setBackground(Color.WHITE);
+        //display.getFrame().addKeyListener(keyManager);
+	timer = 0;
+	enter = 0;
+	enterEvent = false;
+	keyPressed = false;
+	x = 0;
+	y = 0;
+	}
+	
+
+	public void handleInput() {
+		if(KeyManager.isPressed(KeyManager.DOWN) && currentOption < options.length - 1) {
+			currentOption++;
+		}
+		if(KeyManager.isPressed(KeyManager.UP) && currentOption > 0) {
+			currentOption--;
+		}
+		if(KeyManager.isPressed(KeyManager.ENTER)) {
+                        enterEvent = true;
+			selectOption();
+		}          
+	}
+	
+	private void selectOption() {
+		if(currentOption == 0) {
+                    //tunjukkin inventory
+                    System.out.println ("This is inventory");
+		}
+                else if (currentOption == 1)
+                {
+                    //tunjukkin status pemain
+                    System.out.println ("This is status");
+                }
+                else if (currentOption == 2){
+                    //tunjukkin slot game
+                    System.out.println ("This is save game");
+                }
+                else if(currentOption == 4) {
+                    System.out.println ("This is exit. Bye");
+                    System.exit(0);
+		}
+	}
+        
+	public void render() {
+		bs = display.getCanvas().getBufferStrategy();
+		if (bs == null) {
+			display.getCanvas().createBufferStrategy(3);
+			return;
+		}
+		g = bs.getDrawGraphics();
+		
+		// clear screen
+		g.clearRect(0, 0, width, height);
+		
+		// draw start
+                g.drawString("Inventory", 245, 280);
+                g.drawString("Status", 242, 330);
+		g.drawString("Save", 275, 380);
+                selectOption();
+			/*switch (cursorPos) {
+				case 1 : g.drawImage(cursor, 195, 265, 30, 30, null);
+                                        //tambahin tentang inventory item
+						 break;
+				case 2 : g.drawImage(cursor, 195, 315, 30, 30, null);
+                                        //liatin status pemain semuanya, HP dan level
+				 		 break;
+				case 3 : g.drawImage(cursor, 195, 365, 30, 30, null);
+                                        //save slotnya
+						 break;*/
+          
+                
+		// draw end
+		bs.show();
+		g.dispose();
+	}
+
+	@Override
+	public void run() {
+		init();
+		
+		int fps = 60;
+		double timePerTick = 1000000000 / fps;
+		double delta = 0;
+		long now;
+		long lastTime = System.nanoTime();
+		long timer = 0;
+		int ticks = 0;
+		
+		while(running) {
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += now - lastTime;
+			lastTime  = now;
+			
+			if(delta >= 1) {
+				selectOption();
+                                handleInput();
+				render();
+				ticks++;
+				delta--;
+			}
+			
+			if (timer >= 1000000000) {
+				ticks = 0;
+				timer = 0;
+			}
+		}
+		stop();
+	}
+	
+	public synchronized void start() {
+		if (running) {
+			return;
+		}
+		running = true;
+		thread = new Thread(this);
+		thread.start();
+	}
+	public synchronized void stop() {
+		if (!running) {
+			return;
+		}
+		running = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
